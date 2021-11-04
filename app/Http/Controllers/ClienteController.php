@@ -43,28 +43,6 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-       /* $campos=[
-            'Nombre'=>'required|string|max:100',
-            'ApellidoPaterno'=>'required|string|max:100',
-            'ApellidoMaterno'=>'required|string|max:100',
-            'dni'=>'required|string|max:8',
-            'Telefono'=>'required|string|max:9',
-            'Correo'=>'required|email',
-            //'Membresia'=>'required|string|max:100',
-            'Entrenador'=>'required|string|max:100',
-            'Objetivo_fisico'=>'required|string|max:100',
-            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
-            'Fecha_Inicio'=>'required|string|',
-            'Fecha_Final'=>'required|string|',
-        ];
-
-        $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'Foto.required'=>'La foto requerida'
-        ];      
-
-        $this->validate($request, $campos, $mensaje);*/
-
         $request->validate([
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
@@ -84,7 +62,7 @@ class ClienteController extends Controller
 
         if($request->hasFile('Foto')){
 
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
+            $datosCliente['Foto']=$request->file('Foto')->store('uploads');
 
         }
         Cliente::insert($datosCliente);
@@ -146,7 +124,7 @@ class ClienteController extends Controller
 
         if($request->hasFile('Foto')){
 
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
+            $datosCliente['Foto']=$request->file('Foto')->store('uploads');
 
         }
         

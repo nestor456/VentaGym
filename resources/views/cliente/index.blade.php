@@ -27,7 +27,7 @@
                 @foreach($clientes as $cliente)
                     
                     <tr>
-                    <td class="text-center"><img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$cliente->Foto }}" width="100" alt=""> </td>
+                    <td class="text-center"><img class="img-thumbnail img-fluid" src="{{ asset('storage')."/".$cliente->Foto }}" width="100" alt=""> </td>
                     <td class="text-center">{{ $cliente->Nombre }}</td>
                     <td class="text-center">{{ $cliente->ApellidoPaterno }}</td>
                     <td class="text-center">{{ $cliente->dni }}</td>

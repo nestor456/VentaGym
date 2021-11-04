@@ -25,6 +25,7 @@ class CreateVentasTable extends Migration
             $table->decimal('tax');
             $table->decimal('total');
             $table->enum('status',['VALID','CANCELED'])->default('VALID');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

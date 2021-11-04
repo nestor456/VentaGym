@@ -20,7 +20,6 @@
                 <th class="text-center">DNI</th>
                 <th class="text-center">Fecha</th>
                 <th class="text-center">Total</th>
-                <th class="text-center">Estado</th>
                 <th class="text-center" colspan="2">Acciones</th>
             </thead>
             <tbody>
@@ -31,8 +30,7 @@
                     <td class="text-center">{{ $venta->cliente->Nombre }} {{ $venta->cliente->ApellidoPaterno }} {{ $venta->cliente->ApellidoMaterno }}</td>
                     <td class="text-center">{{ $venta->cliente->dni }}</td>
                     <td class="text-center">{{ $venta->sale_date }}</td>
-                    <td class="text-center">{{ $venta->total }}</td>
-                    <td class="text-center">{{ $venta->status }}</td>                  
+                    <td class="text-center">{{ $venta->total }}</td>               
                     <td width="50px">
                         <form action="{{ url('/venta/'.$venta->id ) }}" class="d-inline" method="post">
                             @csrf

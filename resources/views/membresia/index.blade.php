@@ -9,7 +9,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        <a href="{{ url('membresia/create') }}" class="btn btn-success">Resgitrar nueva Membresia</a>
+        <a href="{{ url('membresia/create') }}" class="btn btn-success">Registrar nueva Membresia</a>
         <table class="table table-dark">
             <thead class="thead-light">
                 <th>#</th>

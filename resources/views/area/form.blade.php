@@ -7,6 +7,11 @@
                 </ul>                
             </div>           
 @endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
+    </div>
+@endif
 
 <div class="form-group">
     <label for="Nombre">Nombre del Area</label>

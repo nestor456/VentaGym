@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Request\AreaStoreRequest;
 
@@ -50,7 +51,13 @@ class AreaController extends Controller
         ];
 
         $this->validate($request, $campos, $mensaje);
+        $validator = Validator::make(['Nombre' => $request->get('Nombre')], [
+            'Nombre' => ' required|string|max:100|unique:areas',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'El area ya existe');
+        } 
 
         $datosArea = request()->except('_token'); 
         Area::insert($datosArea);
@@ -102,6 +109,14 @@ class AreaController extends Controller
         ];
 
         $this->validate($request, $campos, $mensaje);
+        
+        $validator = Validator::make(['Nombre' => $request->get('Nombre')], [
+            'Nombre' => ' required|string|max:100|unique:areas',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'El area ya existe');
+        } 
 
         $datosArea = request()->except(['_token','_method']);
         Area::where('id','=',$id)->update($datosArea);

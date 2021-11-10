@@ -9,7 +9,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        <a href="{{ url('cliente/create') }}" class="btn btn-success">Resgitrar nueva Cliente</a>
+        <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a>
         <br><br>
         <table class="table table-striped table-dark">
             <thead class="thead-light">
@@ -27,7 +27,9 @@
                 @foreach($clientes as $cliente)
                     
                     <tr>
-                    <td class="text-center"><img class="img-thumbnail img-fluid" src="{{ asset('storage')."/".$cliente->Foto }}" width="100" alt=""> </td>
+                    <td class="text-center">
+                        <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100" alt=""> 
+                    </td>
                     <td class="text-center">{{ $cliente->Nombre }}</td>
                     <td class="text-center">{{ $cliente->ApellidoPaterno }}</td>
                     <td class="text-center">{{ $cliente->dni }}</td>

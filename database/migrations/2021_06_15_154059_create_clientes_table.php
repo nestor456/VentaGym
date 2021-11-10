@@ -25,7 +25,7 @@ class CreateClientesTable extends Migration
             //$table->string('Promocion');
             $table->string('Entrenador');
             $table->text('Objetivo_fisico');
-            $table->string('Foto');
+            $table->string('Foto')->nullable();
             $table->string('Fecha_Inicio');
             $table->string('Fecha_Final');
             $table->softDeletes();

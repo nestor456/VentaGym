@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membresia;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class MembresiaController extends Controller
@@ -39,7 +40,7 @@ class MembresiaController extends Controller
     public function store(Request $request)
     {
         //
-        /*$campos=[
+        $campos=[
             'NombreMembresia'=>'required|string|max:100',
         ];
 
@@ -47,10 +48,15 @@ class MembresiaController extends Controller
             'required'=>'El :attribute es requerido'
         ];
 
-        $this->validate($request, $campos, $mensaje);*/
-        $request->validate([
-            'NombreMembresia'=>'required|string|max:100',
-        ]); 
+        $this->validate($request, $campos, $mensaje);
+       
+        $validator = Validator::make(['NombreMembresia' => $request->get('NombreMembresia')], [
+            'NombreMembresia' => ' required|string|max:100|unique:membresias',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'La Membresia ya existe');
+        }  
 
         $datosMembresia = request()->except('_token'); 
         Membresia::insert($datosMembresia);
@@ -92,6 +98,13 @@ class MembresiaController extends Controller
     {
         //
         $datosMembresia = request()->except(['_token','_method']);
+        $validator = Validator::make(['NombreMembresia' => $request->get('NombreMembresia')], [
+            'NombreMembresia' => ' required|string|max:100|unique:membresias',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'El nombre ya existe');
+        } 
         Membresia::where('id','=',$id)->update($datosMembresia);
         return redirect('membresia')->with('info','La membresia se edito con éxito');
     }

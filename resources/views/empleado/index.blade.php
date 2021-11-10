@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-body">
             <div class="col-xl-12">
-                <a href="{{ url('empleado/create') }}" class="btn btn-success">Resgitrar nuevo empleado</a>
+                <a href="{{ url('empleado/create') }}" class="btn btn-success">Registrar nuevo empleado</a>
         <br><br>
     
         <form class="form-inline" action="{{ url('/empleado') }}" method="GET">

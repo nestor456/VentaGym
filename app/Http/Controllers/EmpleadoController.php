@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -55,7 +56,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        /*$campos=[
+        $campos=[
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -67,21 +68,17 @@ class EmpleadoController extends Controller
             
         ];
         $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'Foto.required'=>'La foto requerida'
+            'required'=>'El :attribute es requerido'
         ];
-        $this->validate($request, $campos, $mensaje);*/  
-        
-        $request->validate([
-            'Nombre'=>'required|string|max:100',
-            'ApellidoPaterno'=>'required|string|max:100',
-            'ApellidoMaterno'=>'required|string|max:100',
-            'dni'=>'required|string|max:8',
-            'Telefono'=>'required|string|max:9',
-            'Correo'=>'required|email',
-            'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|',
+        $this->validate($request, $campos, $mensaje);
+
+        $validator = Validator::make(['dni' => $request->get('dni')], [
+            'dni' => 'required|string|max:8|unique:empleados',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'El DNI ya existe');
+        }  
 
         //$datosEmpleado = request()->all(); 
         $datosEmpleado = request()->except('_token'); 

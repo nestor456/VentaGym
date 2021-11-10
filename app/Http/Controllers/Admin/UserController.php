@@ -35,11 +35,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $campos=[
             'name'=>'required|string|max:100',
             'email'=>'required|email',
             'password'=>'required|string|max:8'
-        ]);
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
 
         $users = User::create([
             'name'=> $request->name,
@@ -86,11 +92,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $campos=[
             'name'=>'required|string|max:100',
             'email'=>'required|email',
             'password'=>'required|string|max:8'
-        ]);
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+        
+        $this->validate($request, $campos, $mensaje);
 
         $user->update([
             'name'=> $request->name,

@@ -9,7 +9,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        <a href="{{ url('area/create') }}" class="btn btn-success">Resgitrar nueva Area</a>
+        <a href="{{ url('area/create') }}" class="btn btn-success">Registrar nueva Area</a>
         <br><br>
         <table class="table table-dark">
             <thead class="thead-light">

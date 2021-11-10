@@ -40,9 +40,14 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $campos=[
             'name'=>'required|string|max:100'
-        ]);
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+        
+        $this->validate($request, $campos, $mensaje);
 
         $role = Role::create($request->all());
 
@@ -84,9 +89,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $request->validate([
+        $campos=[
             'name'=>'required|string|max:100'
-        ]);
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+        
+        $this->validate($request, $campos, $mensaje);
         $role->update($request->all());
         $role->permissions()->sync($request->permission);
         return redirect()->route('admin.roles.index')->with('info','El rol se actualizo con éxito');

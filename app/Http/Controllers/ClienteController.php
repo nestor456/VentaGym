@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Membresia;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use ILLuminate\Support\Facades\Storage;
 
@@ -43,7 +44,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $campos=[
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -53,16 +54,28 @@ class ClienteController extends Controller
             'Membresia'=>'required|string|max:100',
             'Entrenador'=>'required|string|max:100',
             'Objetivo_fisico'=>'required|string|max:100',
-            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
             'Fecha_Inicio'=>'required|string|',
             'Fecha_Final'=>'required|string|',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $validator = Validator::make(['dni' => $request->get('dni')], [
+            'dni' => 'required|string|max:8|unique:clientes',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'El DNI ya existe');
+        }  
 
         $datosCliente = request()->except('_token'); 
 
         if($request->hasFile('Foto')){
 
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads');
+            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
 
         }
         Cliente::insert($datosCliente);
@@ -115,7 +128,6 @@ class ClienteController extends Controller
             'Membresia'=>'required|string|max:100',
             'Entrenador'=>'required|string|max:100',
             'Objetivo_fisico'=>'required|string|max:100',
-            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
             'Fecha_Inicio'=>'required|string|',
             'Fecha_Final'=>'required|string|',
         ]);
@@ -124,7 +136,7 @@ class ClienteController extends Controller
 
         if($request->hasFile('Foto')){
 
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads');
+            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
 
         }
         

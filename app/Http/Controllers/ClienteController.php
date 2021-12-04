@@ -150,7 +150,7 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $id)
+    public function destroy($id)
     {
         //
         Cliente::destroy($id);

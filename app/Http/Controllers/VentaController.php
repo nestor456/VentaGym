@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Venta;
 use App\Models\Cliente;
 use App\Models\Producto;
+use App\Models\DetalleVenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -58,10 +59,28 @@ class VentaController extends Controller
         //
     }
 
-    public function edit(Venta $venta)
+    public function edit($id)
     {
-        $clientes = Cliente::get();
-        return view('venta.edite',compact('clientes'));
+        $venta = Venta::findOrFail($id);
+        $clientes = Cliente::where('id',$venta->cliente_id)->get();
+        if($venta){
+            $detalleVentas = DetalleVenta::where('venta_id', $venta->id)->get();
+            $details[] = [];
+            foreach($detalleVentas as $detail){
+                $producto = Producto::find($detail->producto_id);
+                $details[] =[
+                    'id'=> $detail->id,
+                    'producto_id' => $detail->producto_id,
+                    'id_prodcuto' => $producto->id,
+                    'stock' => $producto->stock,
+                    'precio' => $producto->precio,
+                    'NombreProducto'=> $producto->NombreProducto,
+                    'quantity'=> $detail->quantity
+                ];
+            }
+        }        
+        
+        return view('venta.edit', compact('venta','clientes','details'));
     }
 
     public function update(Request $request, Venta $venta)

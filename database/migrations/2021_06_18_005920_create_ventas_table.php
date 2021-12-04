@@ -21,6 +21,7 @@ class CreateVentasTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->string('forma_pago');
             $table->string('sale_date');
             $table->decimal('tax');
             $table->decimal('total');

@@ -10,7 +10,7 @@ class Venta extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['cliente_id', 'user_id', 'sale_date','tax','total','tatus'];
+    protected $fillable = ['cliente_id', 'user_id','forma_pago','sale_date','tax','total','tatus'];
 
 
     public function user(){

@@ -7,6 +7,13 @@
         @endforeach
     </select>
 </div>
+<div class="form-group">
+    <label for="forma_pago">forma de pago</label>
+    <select class="form-control" name="forma_pago" id="forma_pago">
+        <option value="Crédito">Crédito</option>
+        <option value="Al contado">Al contado</option>
+      </select>
+</div>
 
 <div class="form-group">
     <label for="tax">Impuesto</label>

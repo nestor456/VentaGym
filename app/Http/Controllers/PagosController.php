@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Asistencia_cliente;
-use App\Models\Cliente;
+use App\Models\Pagos;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
-class AsistenciaClienteController extends Controller
+class PagosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class AsistenciaClienteController extends Controller
      */
     public function index()
     {
-        $asistencias = Asistencia_cliente::whereDate('fecha', Carbon::today('America/Lima'))->get();
-        return view('asistencia_cliente.index', compact('asistencias'));
+        //
     }
 
     /**
@@ -25,12 +22,9 @@ class AsistenciaClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $dni = $request->dni;
-        $clientes = cliente::where('dni',$dni)->first();
-
-        return view('asistencia_cliente.create',compact('clientes'));
+        //
     }
 
     /**
@@ -41,16 +35,16 @@ class AsistenciaClienteController extends Controller
      */
     public function store(Request $request)
     {
-       
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Asistencia_cliente  $asistencia_cliente
+     * @param  \App\Models\Pagos  $pagos
      * @return \Illuminate\Http\Response
      */
-    public function show(Asistencia_cliente $asistencia_cliente)
+    public function show(Pagos $pagos)
     {
         //
     }
@@ -58,10 +52,10 @@ class AsistenciaClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Asistencia_cliente  $asistencia_cliente
+     * @param  \App\Models\Pagos  $pagos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Asistencia_cliente $asistencia_cliente)
+    public function edit(Pagos $pagos)
     {
         //
     }
@@ -70,10 +64,10 @@ class AsistenciaClienteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Asistencia_cliente  $asistencia_cliente
+     * @param  \App\Models\Pagos  $pagos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asistencia_cliente $asistencia_cliente)
+    public function update(Request $request, Pagos $pagos)
     {
         //
     }
@@ -81,10 +75,10 @@ class AsistenciaClienteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Asistencia_cliente  $asistencia_cliente
+     * @param  \App\Models\Pagos  $pagos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asistencia_cliente $asistencia_cliente)
+    public function destroy(Pagos $pagos)
     {
         //
     }

@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container-fluid" >
-
-    <br>
+    <a href="{{ url('asistencia_cliente/create') }}" class="btn btn-success">Asistencia Cliente</a>
+    <br><br>
     <div class="table-responsive">
         <table class="table table-striped table-dark">
             <thead class="thead-light">

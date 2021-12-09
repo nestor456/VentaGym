@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Venta;
 use App\Models\Cliente;
 use App\Models\Producto;
+use App\Models\Pagos;
 use App\Models\DetalleVenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,8 @@ class VentaController extends Controller
     {
         $clientes = Cliente::get();
         $productos = Producto::get();
-        return view('venta.create',compact('clientes','productos'));
+        $pagos = Pagos::get();
+        return view('venta.create',compact('clientes','productos','pagos'));
     }    
     public function store(Request $request)
     { 
@@ -63,29 +65,25 @@ class VentaController extends Controller
     {
         $venta = Venta::findOrFail($id);
         $clientes = Cliente::where('id',$venta->cliente_id)->get();
-        if($venta){
-            $detalleVentas = DetalleVenta::where('venta_id', $venta->id)->get();
-            $details[] = [];
-            foreach($detalleVentas as $detail){
-                $producto = Producto::find($detail->producto_id);
-                $details[] =[
-                    'id'=> $detail->id,
-                    'producto_id' => $detail->producto_id,
-                    'id_prodcuto' => $producto->id,
-                    'stock' => $producto->stock,
-                    'precio' => $producto->precio,
-                    'NombreProducto'=> $producto->NombreProducto,
-                    'quantity'=> $detail->quantity
-                ];
-            }
-        }        
+        $pagos = Pagos::all();
+        $subtotal = 0 ;
+        $detalleVentas = $venta->detalleVenta;
+        foreach($detalleVentas as $detalleVenta){
+            $subtotal += $detalleVenta->quantity * $detalleVenta->precio;
+        }
         
-        return view('venta.edit', compact('venta','clientes','details'));
+        return view('venta.edit', compact('venta','clientes','detalleVentas','subtotal','pagos'));
     }
 
-    public function update(Request $request, Venta $venta)
+    public function update(Request $request, $id)
     {
-        //
+        $forma_pago = request()->forma_pago;
+        $obserbacion= request()->obserbacion;
+        $venta = Venta::find($id);
+        $venta->fill(['forma_pago' => $forma_pago])->save();   
+        $venta->fill(['obserbacion' => $obserbacion])->save();  
+
+        return redirect('venta')->with('info','El rol se edito con éxito');
     }
 
      function destroy($id)

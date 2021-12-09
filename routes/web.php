@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('venta',VentaController::class)->names('admin.venta');
     Route::resource('asistencia',AsistenciaController::class)->names('admin.asistencia');
     Route::resource('asistencia_cliente',AsistenciaClienteController::class)->names('admin.asistencia_cliente');
-    
+
     Route::resource('users', UserController::class)->names('admin.users');
     Route::resource('roles', RoleController::class)->names('admin.roles');
     

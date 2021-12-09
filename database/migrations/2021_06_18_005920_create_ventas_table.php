@@ -22,6 +22,10 @@ class CreateVentasTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('forma_pago');
+            $table->string('obserbacion')->nullable();
+            $table->string('fecha_ini')->nullable();
+            $table->string('fecha_fin')->nullable();
+            
             $table->string('sale_date');
             $table->decimal('tax');
             $table->decimal('total');

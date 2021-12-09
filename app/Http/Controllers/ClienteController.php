@@ -19,6 +19,15 @@ class ClienteController extends Controller
     public function index()
     {
         //
+        $clientes = Cliente::get();
+       foreach ($clientes  as $cliente) {
+        $Fecha_Inicio = DateTime($cliente->Fecha_Inicio);
+        $Fecha_Final = DateTime($cliente->Fecha_Final);
+
+        $diff = date_diff($Fecha_Inicio,$Fecha_Final);
+        dd($diff);
+       }
+
         $datos['clientes'] = Cliente::paginate(10);
         return view('cliente.index', $datos);
     }

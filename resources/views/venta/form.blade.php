@@ -7,13 +7,37 @@
         @endforeach
     </select>
 </div>
+
 <div class="form-group">
     <label for="forma_pago">forma de pago</label>
-    <select class="form-control" name="forma_pago" id="forma_pago">
-        <option value="Crédito">Crédito</option>
-        <option value="Al contado">Al contado</option>
+    <select class="form-control" name="forma_pago" id="forma_pago" onchange="Mostrarcredito();">
+        @foreach($pagos as $pago)
+        <option value="{{$pago->id}}">{{$pago->name}}</option>
+        @endforeach
       </select>
 </div>
+
+<div class="credito" style="display: none">
+    <div class="form-group">
+        <label for="tax">Obserbacion</label>
+        <input type="text" class="form-control" name="obserbacion" id="obserbacion" aria-describedat="helpId">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <samp>Fecha inicial</samp>
+            <div class="form-group">
+                <input class="form-control" type="date" name="fecha_ini" id="fecha_ini">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <samp>Fecha final</samp>
+            <div class="form-group">
+                <input class="form-control" type="date" name="fecha_fin" id="fecha_fin">
+            </div>
+        </div>
+    </div>  
+</div>   
+
 
 <div class="form-group">
     <label for="tax">Impuesto</label>

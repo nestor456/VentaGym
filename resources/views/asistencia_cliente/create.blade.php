@@ -11,7 +11,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form action="{{ url('asistencia_cliente')}}" method="get" enctype="multipart/form-data">
+            <form action="{{ url('asistencia_cliente/create')}}" method="get" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="Nombre">Ingresar DNI</label>

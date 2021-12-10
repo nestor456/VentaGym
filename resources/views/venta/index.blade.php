@@ -32,7 +32,7 @@
                     <td class="text-center">{{ $venta->cliente->dni }}</td>
                     <td class="text-center">{{ $venta->sale_date }}</td>
                     <td class="text-center">{{ $venta->total }}</td>  
-                    <td class="text-center">{{ $venta->forma_pago }}</td>  
+                    <td class="text-center">{{ $venta->forma_pago }} dias {{ $diff }}</td>  
                     <td width="50px">
                         <a href="{{ url('/venta/'.$venta->id.'/edit') }}" class="btn btn-warning">
                             Editar

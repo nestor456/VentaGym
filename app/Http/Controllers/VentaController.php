@@ -20,7 +20,21 @@ class VentaController extends Controller
     public function index()
     {
         $ventas = Venta::paginate(10);
-        return view('venta.index', compact('ventas'));
+
+        $fechaVentas = Venta::where('status', 'VALID')->get();
+        foreach ($fechaVentas as $fechaVenta) {
+
+            $fecha_i=$fechaVenta->fecha_ini;            
+            $fecha_f=$fechaVenta->fecha_fin;
+
+            $fecha_ini = new Carbon($fecha_i);
+            $fecha_fin = new Carbon($fecha_f);
+
+            $diff = $fecha_ini->diffInDays($fecha_fin);
+        }
+
+               
+        return view('venta.index', compact('ventas','diff'));
     }
     public function create()
     {

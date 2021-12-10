@@ -16,10 +16,9 @@ class AsistenciaClienteController extends Controller
      */
     public function index(Request $request)
     {
-        $dni = $request->dni;
-        $clientes = cliente::where('dni',$dni)->first();
-
-        return view('asistencia_cliente.create',compact('clientes'));
+        $asistencias = Asistencia_cliente::whereDate('fecha', Carbon::today('America/Lima'))->get();
+        return view('asistencia_cliente.index', compact('asistencias'));
+        
     }
 
     /**
@@ -28,9 +27,10 @@ class AsistenciaClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
-        $asistencias = Asistencia_cliente::whereDate('fecha', Carbon::today('America/Lima'))->get();
-        return view('asistencia_cliente.index', compact('asistencias'));
+    {       
+        $dni = $request->dni;
+        $clientes = Cliente::where('dni',$dni)->first();       
+        return view('asistencia_cliente.create',compact('clientes'));
     }
 
     /**
@@ -41,6 +41,7 @@ class AsistenciaClienteController extends Controller
      */
     public function store(Request $request)
     {
+        
         $id_cliente = $request->id;
 
         if($id_cliente){
@@ -50,10 +51,10 @@ class AsistenciaClienteController extends Controller
             'fecha'=>Carbon::now('America/lima'),
         ]);   
 
-        return redirect('asistencia_cliente/create ')->with('mensaje','Asistencia Registrada');
+        return redirect('asistencia_cliente')->with('mensaje','Asistencia Registrada');
 
         }else{
-            return redirect('asistencia_cliente/create ')->with('mensaje','DNI no registrado');
+            return redirect('asistencia_cliente')->with('mensaje','DNI no registrado');
         }
     }
 

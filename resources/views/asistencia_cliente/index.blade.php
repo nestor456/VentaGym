@@ -7,7 +7,7 @@
     </div>
 @endif
 <div class="container-fluid" >
-    <a href="{{ url('asistencia_cliente') }}" class="btn btn-success">Asistencia Cliente</a>
+    <a href="{{ url('asistencia_cliente/create') }}" class="btn btn-success">Asistencia Cliente</a>
     <br><br>
     <div class="table-responsive">
         <table class="table table-striped table-dark">

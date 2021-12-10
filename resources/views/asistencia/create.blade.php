@@ -2,10 +2,13 @@
 
 @section('content')
 
+@if(session('mensaje'))
+    <div class="alert alert-success">
+        {{session('mensaje')}}
+    </div>
+@endif
+
 <div class="container">
-    @if(Session::has('mensaje'))
-    {{ Session::get('mensaje') }}
-    @endif 
     <form action="{{ url('/asistencia')}}" method="post" enctype="multipart/form-data">
         @csrf
         @include('asistencia.form',['modo'=>'Create'])

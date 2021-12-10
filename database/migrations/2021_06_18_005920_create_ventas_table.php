@@ -23,8 +23,8 @@ class CreateVentasTable extends Migration
 
             $table->string('forma_pago');
             $table->string('obserbacion')->nullable();
-            $table->string('fecha_ini')->nullable();
-            $table->string('fecha_fin')->nullable();
+            $table->dateTime('fecha_ini')->nullable();
+            $table->dateTime('fecha_fin')->nullable();
             
             $table->string('sale_date');
             $table->decimal('tax');

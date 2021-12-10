@@ -67,7 +67,7 @@
             @endcan  
 
             @can('admin.asistencia_cliente.index')
-                <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia_cliente') }}">lista Asistencia cliente</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia_cliente/create') }}">lista Asistencia cliente</a>
             @endcan
 
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('reporte/reports_day') }}">Reporte por dia</a>

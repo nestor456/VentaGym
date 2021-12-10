@@ -18,14 +18,15 @@
                 
                 <div class="form-group">
                     <label>forma de pago</label>
-                    <select class="form-control" name="forma_pago" id="forma_pago">
+                    <select class="form-control" name="forma_pago" id="forma_pago" onchange="seleccionado()">
+                        <option value="" disabled selected>Seleccione forma de pago</option>
                         @foreach($pagos as $pago)
-                        <option value="{{$pago->id}}">{{$pago->name}}</option>
+                            <option value="{{ $pago['id'] }}">{{ $pago['name'] }}</option>
                         @endforeach
-                      </select>
+                    </select>
                 </div>
                 
-                <div class="credito" id="credito">
+                <div class="credito" id="credito" style="display:none;">
                     <div class="form-group">
                         <label for="tax">Obserbacion</label>
                         <input type="text" class="form-control" name="obserbacion" id="obserbacion" aria-describedat="helpId">
@@ -233,12 +234,17 @@
         document.getElementById('fecha_ini').value = ano+"-"+mes+"-"+dia;
     }
 
-    $('#forma_pago').on('change',function(){
-        var valor = this.value; //capturamos el valor del option
-        var texto = $(this).find('option:selected').text(); //capturamos el texto del option
+    function seleccionado(){
+        var opt = $('#forma_pago').val();
         
-              
-    });
+        //alert(opt);
+        if(opt=="2"){
+            $('#credito').show();
+        }
+        if(opt=="1"){
+            $('#credito').hide();
+        }
+    }
 
     
 </script>

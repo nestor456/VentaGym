@@ -19,7 +19,7 @@ class AsistenciaController extends Controller
     {
         //
 
-        $asistencias = Asistencia::paginate(10);
+        $asistencias = Asistencia::whereDate('fecha', Carbon::today('America/Lima'))->get();
         return view('asistencia.index', compact('asistencias'));
         
         
@@ -56,10 +56,10 @@ class AsistenciaController extends Controller
             'fecha'=>Carbon::now('America/lima'),
         ]);   
 
-        return redirect('asistencia/create')->with('mensaje','Asistencia Registrada');
+        return redirect('asistencia')->with('mensaje','Asistencia Registrada');
 
         }else{
-            return redirect('asistencia/create')->with('mensaje','DNI no registrado');
+            return redirect('asistencia')->with('mensaje','DNI no registrado');
         }
 
        

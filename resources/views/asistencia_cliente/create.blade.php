@@ -11,7 +11,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.asistencia_cliente.store')}}" method="get" enctype="multipart/form-data">
+            <form action="{{ url('asistencia_cliente')}}" method="get" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="Nombre">Ingresar DNI</label>
@@ -28,7 +28,7 @@
     <div class="card">
         <h5 class="card-header">Cliente</h5>
         <div class="card-body">
-            <form action="{{ route('aistencia_cliente.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('asistencia_cliente') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>

@@ -21,6 +21,7 @@
                 <th class="text-center">Total</th>
                 <th class="text-center">Forma de pago</th>
                 <th class="text-center">Dias Restante</th>
+                <th class="text-center">Semaforo</th>
                 <th class="text-center" colspan="3">Acciones</th>
             </thead>
             <tbody>
@@ -32,7 +33,8 @@
                         <td class="text-center">{{ $venta['sale_date'] }}</td>
                         <td class="text-center">{{ $venta['total'] }}</td>  
                         <td class="text-center">{{ $venta['forma_pago'] }}</td>
-                        <td class="text-center">{{ $venta['rest'] }} dias</td>  
+                        <td class="text-center">{{ $venta['rest'] }} dias</td> 
+                        <td class="text-center" style="background:{{ $venta['color'] }}"> {{ $venta['mensaje'] }}</td> 
                         <td width="50px">
                             <a href="{{ url('/venta/'.$venta['id'].'/edit') }}" class="btn btn-warning">
                                 Editar

@@ -18,9 +18,7 @@ class VentaController extends Controller
 {
     public function index(Request $request)
     {   
-        $datos = Venta::paginate(10);  
-        
-        
+        $datos = Venta::paginate(10);               
             $details = [];
                 foreach ($datos as $data) {
                         $fecha_i=$data->fecha_ini;            
@@ -29,7 +27,20 @@ class VentaController extends Controller
                         $fecha_fin = Carbon::parse($fecha_f);
                         $now = Carbon::now()->subDays();                          
                         $cliente = Cliente::find($data->cliente_id); 
+
                         $forma = $data->forma_pago;
+                        $rest = $fecha_fin->diffInDays($now);  
+
+                        if ($forma == "Credito" && $rest <= 3) {
+                            $mensaje = "ROJO";
+                            $color = "#ff360b";
+                        }elseif($forma == "Credito" && $rest > 3){
+                            $mensaje = "AMARILLO";
+                            $color = "#fff10c";
+                        }elseif($forma == "Al contado"){
+                            $mensaje = "VERDE";
+                            $color = "#1dc12c";
+                        }
 
                     $details[] = [
                         'id'=> $data->id,
@@ -47,6 +58,8 @@ class VentaController extends Controller
                         'tax'=> $data->tax,
                         'total'=> $data->total,
                         'status'=> $data->status,
+                        'mensaje'=> $mensaje,
+                        'color'=> $color,
                         'diff' => $fecha_ini->diffInDays($fecha_fin),
                         'rest' => $fecha_fin->diffInDays($now)                     
                     ];                              

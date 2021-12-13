@@ -16,9 +16,11 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
 {
-    public function index()
-    {
-        $datos = Venta::paginate(10);        
+    public function index(Request $request)
+    {   
+        $datos = Venta::paginate(10);  
+        
+        
             $details = [];
                 foreach ($datos as $data) {
                         $fecha_i=$data->fecha_ini;            

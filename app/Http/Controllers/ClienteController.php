@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Models\Membresia;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use ILLuminate\Support\Facades\Storage;
@@ -17,9 +18,17 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $datos = Cliente::paginate(10);
+        $texto = trim($request->get('texto'));
+
+       $datos = DB::table('clientes')
+                    ->select('id','Nombre', 'ApellidoPaterno', 'ApellidoMaterno','dni','Telefono','Correo','Membresia','Entrenador','Objetivo_fisico','Foto','Fecha_Inicio','Fecha_Final','congelar_membresia','observacion')
+                    ->where('dni','LIKE','%'.$texto.'%')
+                    ->paginate(10);
+
+
+        //$datos = Cliente::paginate(10);
         $details = [];
         foreach ($datos as $data) {
 
@@ -49,7 +58,7 @@ class ClienteController extends Controller
             ];
         }
         //dd($details);
-        return view('cliente.index', compact('datos','details'));
+        return view('cliente.index', compact('datos','details','texto'));
     }
 
     /**

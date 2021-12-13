@@ -11,7 +11,12 @@
     <div class="card-body table-responsive">
         <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a>
         <br><br>
-        <table class="table table-striped table-dark">
+        <form class="form-inline" action="{{ url('/cliente') }}" method="GET">
+            <input class="form-control mr-sm-2" name="texto" value="{{$texto}}" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+        <br>
+        <table class="table table-striped table-dark" name="tabla-cliente" id="tabla-cliente" >
             <thead class="thead-light">
                 <th class="text-center">Foto</th>
                 <th class="text-center">Nombre</th>
@@ -57,5 +62,4 @@
     </div>
 </div>
 </div>
-
 @endsection

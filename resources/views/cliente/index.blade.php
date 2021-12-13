@@ -19,31 +19,31 @@
                 <th class="text-center">dni</th>
                 <th class="text-center">Membresía</th>
                 <th class="text-center">Entrenador</th>
-                <th class="text-center">Fecha Inicio</th>
-                <th class="text-center">Fecha Final</th>
+                <th class="text-center">Congelar Membresia</th>              
+                <th class="text-center">Dias Restantes</th>
                 <th class="text-center" colspan="2">Acciones</th>
             </thead>
             <tbody>
-                @foreach($clientes as $cliente)
+                @foreach($details as $cliente)
                     
                     <tr>
                     <td class="text-center">
-                        <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100" alt=""> 
+                        <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente['Foto'] }}" width="100" alt=""> 
                     </td>
-                    <td class="text-center">{{ $cliente->Nombre }}</td>
-                    <td class="text-center">{{ $cliente->ApellidoPaterno }}</td>
-                    <td class="text-center">{{ $cliente->dni }}</td>
-                    <td class="text-center">{{ $cliente->Membresia }}</td>
-                    <td class="text-center">{{ $cliente->Entrenador }}</td>
-                    <td class="text-center">{{ $cliente->Fecha_Inicio }}</td>
-                    <td class="text-center">{{ $cliente->Fecha_Final }}</td>                        
+                    <td class="text-center">{{ $cliente['Nombre'] }}</td>
+                    <td class="text-center">{{ $cliente['ApellidoPaterno'] }}</td>
+                    <td class="text-center">{{ $cliente['dni'] }}</td>
+                    <td class="text-center">{{ $cliente['Membresia'] }}</td>
+                    <td class="text-center">{{ $cliente['Entrenador'] }}</td>
+                    <td class="text-center">{{ $cliente['congelar_membresia'] }}</td> 
+                    <td class="text-center">{{ $cliente['rest'] }} dias</td>                         
                     <td width="50px">
-                        <a href="{{ url('/cliente/'.$cliente->id.'/edit') }}" class="btn btn-warning">
+                        <a href="{{ url('/cliente/'.$cliente['id'].'/edit') }}" class="btn btn-warning">
                             Editar
                         </a>
                     </td>
                     <td width="50px">
-                        <form action="{{ url('/cliente/'.$cliente->id ) }}" class="d-inline" method="post">
+                        <form action="{{ url('/cliente/'.$cliente['id'] ) }}" class="d-inline" method="post">
                             @csrf
                             {{ method_field('DELETE') }}
                             <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
@@ -53,7 +53,7 @@
                 @endforeach                
             </tbody>
         </table>
-        {!! $clientes->links() !!}
+        {!! $datos->links() !!}
     </div>
 </div>
 </div>

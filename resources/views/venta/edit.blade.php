@@ -22,30 +22,33 @@
 </div>
 <div class="form-group">
     <label for="forma_pago">forma de pago</label>
-    <select class="form-control" name="forma_pago" id="forma_pago">
+    <select class="form-control" name="forma_pago" id="forma_pago" onchange="seleccionado()">
         @foreach($pagos as $pago)
-        <option value="{{ $pago['id'] }}">{{ $pago['name'] }}</option>
+        <option value="{{ $pago['name'] }}">{{ $pago['name'] }}</option>
         @endforeach
       </select>
 </div>
-<div class="form-group">
-    <label for="tax">Obserbacion</label>
-    <input type="text" class="form-control" name="obserbacion" id="obserbacion" value="{{ isset($venta->obserbacion)?$venta->obserbacion:'' }}" aria-describedat="helpId">
+
+<div class="credito" id="credito" style="display:none;">
+    <div class="form-group">
+        <label for="tax">Obserbacion</label>
+        <input type="text" class="form-control" name="obserbacion" id="obserbacion" value="{{ isset($venta->obserbacion)?$venta->obserbacion:'' }}" aria-describedat="helpId">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <samp>Fecha inicial</samp>
+            <div class="form-group">
+                <input class="form-control" type="date" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <samp>Fecha final</samp>
+            <div class="form-group">
+                <input class="form-control" type="date" value="value="{{ isset($venta->fecha_fin)?$venta->fecha_fin:'' }}"" name="fecha_fin" id="fecha_fin">
+            </div>
+        </div>
+    </div> 
 </div>
-<div class="row">
-    <div class="col-12 col-md-3">
-        <samp>Fecha inicial</samp>
-        <div class="form-group">
-            <input class="form-control" type="date" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini" disabled>
-        </div>
-    </div>
-    <div class="col-12 col-md-3">
-        <samp>Fecha final</samp>
-        <div class="form-group">
-            <input class="form-control" type="date" value="value="{{ isset($venta->fecha_fin)?$venta->fecha_fin:'' }}"" name="fecha_fin" id="fecha_fin">
-        </div>
-    </div>
-</div>  
 
 <div class="form-group">
     <h4 class="card-title">Detalles de Venta</h4>
@@ -117,5 +120,17 @@
             mes='0'+mes;//agregar cero si es menor de 10
         }            
         document.getElementById('fecha_ini').value = ano+"-"+mes+"-"+dia;
+        document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
+    }
+    function seleccionado(){
+        var opt = $('#forma_pago').val();
+        
+        //alert(opt);
+        if(opt=="Credito"){
+            $('#credito').show();
+        }
+        if(opt=="Al contado"){
+            $('#credito').hide();
+        }
     }
 </script>

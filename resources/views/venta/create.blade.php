@@ -21,7 +21,7 @@
                     <select class="form-control" name="forma_pago" id="forma_pago" onchange="seleccionado()">
                         <option value="" disabled selected>Seleccione forma de pago</option>
                         @foreach($pagos as $pago)
-                            <option value="{{ $pago['id'] }}">{{ $pago['name'] }}</option>
+                            <option value="{{ $pago['name'] }}">{{ $pago['name'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -219,7 +219,6 @@
         $("#fila" + index).remove();
         evaluar();
     }
-
     window.onload = function(){
         var fecha = new Date(); //fecha actual
         var mes = fecha.getMonth()+1;//obteniendo mes
@@ -232,16 +231,18 @@
             mes='0'+mes;//agregar cero si es menor de 10
         }            
         document.getElementById('fecha_ini').value = ano+"-"+mes+"-"+dia;
+        document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
     }
+
 
     function seleccionado(){
         var opt = $('#forma_pago').val();
         
         //alert(opt);
-        if(opt=="2"){
+        if(opt=="Credito"){
             $('#credito').show();
         }
-        if(opt=="1"){
+        if(opt=="Al contado"){
             $('#credito').hide();
         }
     }

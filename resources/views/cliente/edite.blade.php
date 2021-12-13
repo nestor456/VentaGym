@@ -15,3 +15,16 @@
     </div>    
 </div>
 @endsection
+<script>
+    function seleccionado(){
+        var opt = $('#congelar_membresia').val();
+        
+        //alert(opt);
+        if(opt=="Activar"){
+            $('#credito').show();
+        }
+        if(opt=="Desactivar"){
+            $('#credito').hide();
+        }
+    }
+</script>

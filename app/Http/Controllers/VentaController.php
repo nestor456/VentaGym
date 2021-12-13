@@ -16,33 +16,52 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
 {
-
     public function index()
     {
-        $ventas = Venta::paginate(10);
+        $datos = Venta::paginate(10);        
+            $details = [];
+                foreach ($datos as $data) {
+                        $fecha_i=$data->fecha_ini;            
+                        $fecha_f=$data->fecha_fin;        
+                        $fecha_ini = Carbon::parse($fecha_i);
+                        $fecha_fin = Carbon::parse($fecha_f);
+                        $now = Carbon::now()->subDays();                          
+                        $cliente = Cliente::find($data->cliente_id); 
+                        $forma = $data->forma_pago;
 
-        $fechaVentas = Venta::where('status', 'VALID')->get();
-        foreach ($fechaVentas as $fechaVenta) {
-
-            $fecha_i=$fechaVenta->fecha_ini;            
-            $fecha_f=$fechaVenta->fecha_fin;
-
-            $fecha_ini = new Carbon($fecha_i);
-            $fecha_fin = new Carbon($fecha_f);
-
-            $diff = $fecha_ini->diffInDays($fecha_fin);
-        }
-
-               
-        return view('venta.index', compact('ventas','diff'));
+                    $details[] = [
+                        'id'=> $data->id,
+                        'cliente_id'=> $data->cliente_id,
+                        'Nombre'=> $cliente->Nombre, 
+                        'ApellidoPaterno'=> $cliente->ApellidoPaterno, 
+                        'ApellidoMaterno'=> $cliente->ApellidoMaterno,
+                        'dni'=> $cliente->dni,
+                        'user_id'=> $data->user_id,
+                        'forma_pago'=> $data->forma_pago,
+                        'obserbacion'=> $data->obserbacion,
+                        'fecha_ini'=> $data->fecha_ini,
+                        'fecha_fin'=> $data->fecha_fin,
+                        'sale_date'=> $data->sale_date,
+                        'tax'=> $data->tax,
+                        'total'=> $data->total,
+                        'status'=> $data->status,
+                        'diff' => $fecha_ini->diffInDays($fecha_fin),
+                        'rest' => $fecha_fin->diffInDays($now)                     
+                    ];                              
+                }
+                //dd($details);
+        return view('venta.index', compact('datos', 'details'));
     }
+
+
     public function create()
     {
         $clientes = Cliente::get();
         $productos = Producto::get();
         $pagos = Pagos::get();
         return view('venta.create',compact('clientes','productos','pagos'));
-    }    
+    }   
+     
     public function store(Request $request)
     { 
         $venta = Venta::create($request->all()+[
@@ -93,9 +112,16 @@ class VentaController extends Controller
     {
         $forma_pago = request()->forma_pago;
         $obserbacion= request()->obserbacion;
+
+        $fecha_ini = request()->fecha_ini;
+        $fecha_fin = request()->fecha_fin;  
+
         $venta = Venta::find($id);
         $venta->fill(['forma_pago' => $forma_pago])->save();   
         $venta->fill(['obserbacion' => $obserbacion])->save();  
+
+        $venta->fill(['fecha_ini' => $fecha_ini])->save();   
+        $venta->fill(['fecha_fin' => $fecha_fin])->save();  
 
         return redirect('venta')->with('info','El rol se edito con éxito');
     }
@@ -106,8 +132,9 @@ class VentaController extends Controller
         return redirect()->route('admin.venta.index')->with('info','La venta se eliminado con éxito');
     }
 
-    public function pdf(Venta $venta)
+    public function pdf($id)
     {
+        $venta = Venta::findOrFail($id);
         $subtotal = 0;
         $detalleVentas = $venta->detalleVenta;
         foreach($detalleVentas as $detalleVenta){
@@ -119,4 +146,5 @@ class VentaController extends Controller
 
         return $pdf->download('Reporte_de_venta'.$venta->id.'.pdf');
     }
+
 }

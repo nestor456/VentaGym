@@ -7,6 +7,7 @@ use App\Models\Empleado;
 use App\Models\Membresia;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use ILLuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
@@ -18,10 +19,37 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $datos = Cliente::paginate(10);
+        $details = [];
+        foreach ($datos as $data) {
 
-        $datos['clientes'] = Cliente::paginate(10);
-        return view('cliente.index', $datos);
+            $fecha_i=$data->Fecha_Inicio;            
+            $fecha_f=$data->Fecha_Final; 
+            $fecha_ini = Carbon::parse($fecha_i);
+            $fecha_fin = Carbon::parse($fecha_f);
+            $now = Carbon::now()->subDays();
+
+            $details[] = [
+                'id'=> $data->id,
+                'Nombre'=> $data->Nombre, 
+                'ApellidoPaterno'=> $data->ApellidoPaterno, 
+                'ApellidoMaterno'=> $data->ApellidoMaterno,
+                'dni'=> $data->dni,
+                'Telefono'=> $data->Telefono,
+                'Correo'=> $data->Correo,
+                'Membresia'=> $data->Membresia,
+                'Entrenador'=> $data->Entrenador,
+                'Objetivo_fisico'=> $data->Objetivo_fisico,
+                'Foto'=> $data->Foto,
+                'Fecha_Inicio'=> $data->Fecha_Inicio,
+                'Fecha_Final'=> $data->Fecha_Final,
+                'congelar_membresia'=> $data->congelar_membresia,
+                'diff' => $fecha_ini->diffInDays($fecha_fin),
+                'rest' => $fecha_fin->diffInDays($now)   
+            ];
+        }
+        //dd($details);
+        return view('cliente.index', compact('datos','details'));
     }
 
     /**

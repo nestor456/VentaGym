@@ -54,17 +54,26 @@
     </select>
 </div>
 <div class="form-group">
-    <label for="Nombre">Objetivo_fisico</label>
+    <label for="Nombre">Objetivo fisico</label>
         <textarea class="form-control" name="Objetivo_fisico" id="Objetivo_fisico" class="form-control">{{ isset($cliente->Objetivo_fisico)?$cliente->Objetivo_fisico:'' }}</textarea>
-
 </div>
-
 <div class="form-group">
     <label for="Foto">Foto</label>
         @if(isset($empleado->Foto))
     <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100" alt="">
         @endif        
     <input type="file" class="form-control-file" name="Foto" id="Foto" value="">
+</div>
+<div class="form-group">
+    <label for="Entrenador">Congelar Membresia</label>
+    <select name="congelar_membresia" id="congelar_membresia" class="form-control" onchange="seleccionado()">
+        <option value="Activar">Activar</option>
+        <option value="Desactivar" selected>Desactivar</option> 
+    </select>
+</div>
+<div class="credito" id="credito" style="display:none;">
+    <label for="Nombre">Observación</label>
+        <textarea class="form-control" name="observacion" id="observacion" class="form-control">{{ isset($cliente->observacion)?$cliente->observacion:'' }}</textarea>
 </div>
 
 <div class="form-group">

@@ -7,10 +7,10 @@
         <a href="{{ url('venta/create') }}" class="btn btn-success">Resgitrar nueva Venta</a>
         <br><br>
         
-        <form class="form-inline" action="{{ url('/venta') }}" method="GET" hidden>
-            <input class="form-control mr-sm-2" name="texto" value="" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline" action="{{ url('/venta') }}" method="GET">
+            <input class="form-control mr-sm-2" name="texto" value="{{$texto}}" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        </form><br>
 
         <table class="table table-striped table-dark">
             <thead class="thead-light">

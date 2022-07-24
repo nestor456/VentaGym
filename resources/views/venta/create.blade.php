@@ -1,6 +1,20 @@
 @extends('layouts.menu')
 
 @section('content')
+@if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li> {{ $error }} </li>
+                    @endforeach
+                </ul>                
+            </div>           
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
+    </div>
+@endif
 
 <div class="container-fluid">
     <div class="card">
@@ -9,11 +23,17 @@
                 @csrf
                 <div class="form-group">
                     <label for="cliente_id">Cliente</label>
-                    <select class="form-control" name="cliente_id" id="cliente_id">
+                    <select class="form-control" name="client_id" id="client_id">
+                        <option value="" disabled selected>Seleccione al Cliente</option>
                         @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id}}">{{$cliente->Nombre}} {{$cliente->ApellidoPaterno}} {{$cliente->ApellidoMaterno}}</option>
+                            <option value="{{ $cliente->id}}_{{ $cliente->dni}}">{{$cliente->Nombre}} {{$cliente->ApellidoPaterno}} {{$cliente->ApellidoMaterno}}</option>
                         @endforeach
                     </select>
+                </div>     
+
+                <div class="form-group" hidden>
+                    <input type="text" name="cliente_id" id="cliente_id" class="form-control">
+                    <input type="text" name="dni" id="dni" class="form-control">
                 </div>
                 
                 <div class="form-group">
@@ -28,7 +48,7 @@
                 
                 <div class="credito" id="credito" style="display:none;">
                     <div class="form-group">
-                        <label for="tax">Obserbacion</label>
+                        <label for="tax">Observacion</label>
                         <input type="text" class="form-control" name="obserbacion" id="obserbacion" aria-describedat="helpId">
                     </div>
                     <div class="row">
@@ -54,7 +74,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="producto_id">Producto</label>
+                    <label for="producto_id">Producto</label> 
                     <select class="form-control" name="producto_id" id="producto_id">
                         <option value="" disabled selected>Seleccione un producto</option>
                         @foreach($productos as $producto)
@@ -149,6 +169,13 @@
 
     $("#guardar").hide();
     $("#producto_id").change(mostrarValores); 
+    $("#client_id").change(mostrarDni); 
+
+    function mostrarDni() {
+        datosCliente = document.getElementById('client_id').value.split('_');       
+        $("#dni").val(datosCliente[1]);
+        $("#cliente_id").val(datosCliente[0]);
+     } 
 
     function mostrarValores() {
        datosProductos = document.getElementById('producto_id').value.split('_');       

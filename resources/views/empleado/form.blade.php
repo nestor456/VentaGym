@@ -48,6 +48,7 @@
         <div class="form-group">
             <label for="Area">Area</label>
                 <select name="Area" id="Area" class="form-control">
+                    <option value="{{ isset($empleado->Area)?$empleado->Area:'' }}" hidden selected>{{ isset($empleado->Area)?$empleado->Area:'' }}</option>
                     @foreach($areas as $area )
                         <option value="{{ $area['Nombre'] }}">{{ $area['Nombre'] }}</option>
                     @endforeach

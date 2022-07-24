@@ -29,6 +29,8 @@ class CreateClientesTable extends Migration
 
             $table->string('congelar_membresia');
             $table->string('observacion')->nullable();
+            $table->string('deuda')->nullable();
+            $table->string('gym')->nullable();
 
             $table->string('Fecha_Inicio');
             $table->string('Fecha_Final');

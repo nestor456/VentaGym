@@ -7,13 +7,13 @@
     </div>
 @endif
 <div class="container-fluid" >
-    <a href="{{ url('asistencia/create') }}" class="btn btn-success">Asistencia Cliente</a>
+    <a href="{{ url('asistencia/create') }}" class="btn btn-success">Asistencia Empleados</a>
     <br><br>
     <div class="table-responsive">
         <table class="table table-striped table-dark">
             <thead class="thead-light">
                 <tr>
-                    <th class="text-center">DNI</th>
+                    <th class="text-center">DNI df</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">A.Paterno</th>
                     <th class="text-center">A.Materno</th>

@@ -17,14 +17,15 @@ class CreateVentasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->string('dni')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('forma_pago');
             $table->string('obserbacion')->nullable();
-            $table->dateTime('fecha_ini')->nullable();
-            $table->dateTime('fecha_fin')->nullable();
+            $table->string('fecha_ini')->nullable();
+            $table->string('fecha_fin')->nullable();
             
             $table->string('sale_date');
             $table->decimal('tax');

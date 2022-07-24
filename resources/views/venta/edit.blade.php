@@ -12,6 +12,9 @@
     <label for="cliente_id">Cliente</label>
     <input type="text" class="form-control" disabled="disabled" value="{{$venta->cliente->Nombre}} {{$venta->cliente->ApellidoPaterno}} {{$venta->cliente->ApellidoMaterno}}">
 </div>
+<div class="form-group" >
+    <input type="text" name="dni" id="dni" value="{{$venta->cliente->dni}}" class="form-control">
+</div>
 <div class="form-group">
     <label for="cliente_id">Vendedor</label>
     <input type="text" class="form-control" disabled="disabled" value="{{$venta->user->name}}">
@@ -31,20 +34,20 @@
 
 <div class="credito" id="credito" style="display:none;">
     <div class="form-group">
-        <label for="tax">Obserbacion</label>
+        <label for="tax">Observacion</label>
         <input type="text" class="form-control" name="obserbacion" id="obserbacion" value="{{ isset($venta->obserbacion)?$venta->obserbacion:'' }}" aria-describedat="helpId">
     </div>
     <div class="row">
         <div class="col-12 col-md-3">
             <samp>Fecha inicial</samp>
             <div class="form-group">
-                <input class="form-control" type="date" value="{{old('fecha_ini')}}" name="fecha_ini" id="fecha_ini">
+                <input type="date" class="form-control"  name="fecha_ini" id="fecha_ini" value="{{$venta->fecha_ini}}" >
             </div>
         </div>
         <div class="col-12 col-md-3">
             <samp>Fecha final</samp>
             <div class="form-group">
-                <input class="form-control" type="date" value="value="{{ isset($venta->fecha_fin)?$venta->fecha_fin:'' }}"" name="fecha_fin" id="fecha_fin">
+                <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ isset($venta->fecha_fin)?$venta->fecha_fin:'' }}" >
             </div>
         </div>
     </div> 

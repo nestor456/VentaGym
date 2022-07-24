@@ -30,31 +30,31 @@
         <div class="card-body">
             <form action="{{ url('asistencia_cliente') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext"  value="{{$clientes->Nombre." ".$clientes->ApellidoPaterno." ".$clientes->ApellidoMaterno}}">
-                      <input type="text" readonly class="form-control-plaintext" name="id" value="{{$clientes->id}}" hidden>
-
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Dni</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext"  value="{{$clientes->dni}}">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Membresia</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext"  value="{{$clientes->Membresia}}">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Fecha Final</label>
-                    <div class="col-sm-10">
-                      <input type="text" readonly class="form-control-plaintext"  value="{{$clientes->Fecha_Final}}">
-                    </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                            <th>Nombre</th>
+                            <th>Dni</th>
+                            <th>Sede</th>
+                            <th>Membresia</th>
+                            <th>Fecha Final</th>
+                            <th>Congelar Membresia</th>
+                            <th>Observación de Deuda</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{$clientes->Nombre." ".$clientes->ApellidoPaterno." ".$clientes->ApellidoMaterno}}
+                                    <input type="text" readonly class="form-control-plaintext" name="id" value="{{$clientes->id}}" hidden>
+                                </td>
+                                <td>{{$clientes->dni}}</td>
+                                <td>{{$clientes->gym}}</td>
+                                <td>{{$clientes->Membresia}}</td>
+                                <td>{{$clientes->Fecha_Final}}</td>
+                                <td>{{$clientes->congelar_membresia}}</td>
+                                <td>{{$clientes->deuda}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <input type="submit" value="Aceptar" class="btn btn-success">
             </form>

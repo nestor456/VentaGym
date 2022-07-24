@@ -19,6 +19,7 @@
         <table class="table table-striped table-dark" name="tabla-cliente" id="tabla-cliente" >
             <thead class="thead-light">
                 <th class="text-center">Foto</th>
+                <th class="text-center">Sede</th>
                 <th class="text-center">Nombre</th>
                 <th class="text-center">A.Paterno</th>
                 <th class="text-center">dni</th>
@@ -35,6 +36,7 @@
                     <td class="text-center">
                         <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente['Foto'] }}" width="100" alt=""> 
                     </td>
+                    <td class="text-center">{{ $cliente['gym'] }}</td>
                     <td class="text-center">{{ $cliente['Nombre'] }}</td>
                     <td class="text-center">{{ $cliente['ApellidoPaterno'] }}</td>
                     <td class="text-center">{{ $cliente['dni'] }}</td>

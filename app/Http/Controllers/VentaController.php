@@ -18,7 +18,9 @@ class VentaController extends Controller
 {
     public function index(Request $request)
     {   
-        $datos = Venta::paginate(10);               
+        $texto = trim($request->get('texto'));
+
+        $datos = Venta::where('id','like','%'.$texto.'%')->paginate(10);               
             $details = [];
                 foreach ($datos as $data) {
                         $fecha_i=$data->fecha_ini;            
@@ -26,7 +28,7 @@ class VentaController extends Controller
                         $fecha_ini = Carbon::parse($fecha_i);
                         $fecha_fin = Carbon::parse($fecha_f);
                         $now = Carbon::now()->subDays();                          
-                        $cliente = Cliente::find($data->cliente_id); 
+                        $cliente = Cliente::find($data->cliente_id);                        
 
                         $forma = $data->forma_pago;
                         $rest = $fecha_fin->diffInDays($now);  
@@ -48,7 +50,7 @@ class VentaController extends Controller
                         'Nombre'=> $cliente->Nombre, 
                         'ApellidoPaterno'=> $cliente->ApellidoPaterno, 
                         'ApellidoMaterno'=> $cliente->ApellidoMaterno,
-                        'dni'=> $cliente->dni,
+                        'dni'=> $data->dni,
                         'user_id'=> $data->user_id,
                         'forma_pago'=> $data->forma_pago,
                         'obserbacion'=> $data->obserbacion,
@@ -65,7 +67,7 @@ class VentaController extends Controller
                     ];                              
                 }
                 //dd($details);
-        return view('venta.index', compact('datos', 'details'));
+        return view('venta.index', compact('datos', 'details','texto'));
     }
 
 
@@ -79,6 +81,16 @@ class VentaController extends Controller
      
     public function store(Request $request)
     { 
+        $campos=[
+            'forma_pago'=>'required|string|max:100'        
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
         $venta = Venta::create($request->all()+[
             'user_id' => auth()->id(),
             'sale_date'=>Carbon::now('America/lima'),
@@ -129,14 +141,17 @@ class VentaController extends Controller
         $obserbacion= request()->obserbacion;
 
         $fecha_ini = request()->fecha_ini;
-        $fecha_fin = request()->fecha_fin;  
+        $fecha_fin = request()->fecha_fin;
+        
+        $dni = request()->dni;
 
         $venta = Venta::find($id);
         $venta->fill(['forma_pago' => $forma_pago])->save();   
         $venta->fill(['obserbacion' => $obserbacion])->save();  
 
         $venta->fill(['fecha_ini' => $fecha_ini])->save();   
-        $venta->fill(['fecha_fin' => $fecha_fin])->save();  
+        $venta->fill(['fecha_fin' => $fecha_fin])->save();
+        $venta->fill(['dni' => $dni])->save();
 
         return redirect('venta')->with('info','El rol se edito con éxito');
     }

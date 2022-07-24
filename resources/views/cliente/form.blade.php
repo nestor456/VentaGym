@@ -37,6 +37,16 @@
     <label for="Correo">Correo</label>
     <input type="text" name="Correo" id="Correo" class="form-control" value="{{ isset($cliente->Correo)?$cliente->Correo:'' }}">
 </div>
+
+<div class="form-group">
+    <label for="Entrenador">Sede</label>
+    <select name="gym" id="gym" class="form-control">
+        <option value="TemploGym" selected>TemploGym</option>
+        <option value="UltraTech">UltraTech</option> 
+    </select>
+</div>
+
+
 <div class="form-group">
     <label for="Membresia">Membresía</label>
     <select name="Membresia" id="Membresia" class="form-control">
@@ -60,6 +70,7 @@
 <div class="form-group">
     <label for="Foto">Foto</label>
         @if(isset($empleado->Foto))
+        {{$cliente->Foto}}
     <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100" alt="">
         @endif        
     <input type="file" class="form-control-file" name="Foto" id="Foto" value="">
@@ -84,6 +95,11 @@
     <label for="Fecha_Final">Fecha_Final</label>
     <input type="date" name="Fecha_Final" id="Fecha_Final" class="form-control" value="{{ isset($cliente->Fecha_Final)?$cliente->Fecha_Final:'' }}">
 </div>
+<div class="form-group">
+    <label for="Correo">Observación de Deuda</label>
+    <input type="text" name="deuda" id="deuda" class="form-control" value="{{ isset($cliente->deuda)?$cliente->deuda:'' }}">
+</div>
+
 <input type="submit" value="{{ $modo }} Datos" class="btn btn-success">
 
 <a href="{{ url('cliente') }}" class="btn btn-primary">Regresar</a>

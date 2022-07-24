@@ -13,6 +13,7 @@
         <table class="table table-striped table-dark">
             <thead class="thead-light">
                 <tr>
+                    <th class="text-center">Sede</th>
                     <th class="text-center">DNI</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">A.Paterno</th>
@@ -23,6 +24,7 @@
             <tbody>
                    @foreach($asistencias as $asistencia)
                     <tr>
+                        <td class="text-center">{{ $asistencia->cliente->gym }}</td>
                         <td class="text-center">{{ $asistencia->cliente->dni }}</td>
                         <td class="text-center">{{ $asistencia->cliente->Nombre }}</td>
                         <td class="text-center">{{ $asistencia->cliente->ApellidoPaterno }}</td>

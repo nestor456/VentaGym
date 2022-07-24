@@ -23,21 +23,19 @@ class ClienteController extends Controller
         $texto = trim($request->get('texto'));
 
        $datos = DB::table('clientes')
-                    ->select('id','Nombre', 'ApellidoPaterno', 'ApellidoMaterno','dni','Telefono','Correo','Membresia','Entrenador','Objetivo_fisico','Foto','Fecha_Inicio','Fecha_Final','congelar_membresia','observacion')
+                    ->select('id','Nombre', 'ApellidoPaterno', 'ApellidoMaterno','dni','Telefono','Correo','Membresia','Entrenador','Objetivo_fisico','Foto','Fecha_Inicio','Fecha_Final','gym','congelar_membresia','observacion','deleted_at')
                     ->where('dni','LIKE','%'.$texto.'%')
                     ->paginate(10);
-
-
         //$datos = Cliente::paginate(10);
         $details = [];
         foreach ($datos as $data) {
-
             $fecha_i=$data->Fecha_Inicio;            
             $fecha_f=$data->Fecha_Final; 
             $fecha_ini = Carbon::parse($fecha_i);
             $fecha_fin = Carbon::parse($fecha_f);
             $now = Carbon::now()->subDays();
-
+            $deleted_at = $data->deleted_at;
+           if($deleted_at == null){
             $details[] = [
                 'id'=> $data->id,
                 'Nombre'=> $data->Nombre, 
@@ -50,12 +48,14 @@ class ClienteController extends Controller
                 'Entrenador'=> $data->Entrenador,
                 'Objetivo_fisico'=> $data->Objetivo_fisico,
                 'Foto'=> $data->Foto,
+                'gym'=> $data->gym,
                 'Fecha_Inicio'=> $data->Fecha_Inicio,
                 'Fecha_Final'=> $data->Fecha_Final,
                 'congelar_membresia'=> $data->congelar_membresia,
                 'diff' => $fecha_ini->diffInDays($fecha_fin),
                 'rest' => $fecha_fin->diffInDays($now)   
             ];
+           }            
         }
         //dd($details);
         return view('cliente.index', compact('datos','details','texto'));
@@ -94,6 +94,7 @@ class ClienteController extends Controller
             'Objetivo_fisico'=>'required|string|max:100',
             'Fecha_Inicio'=>'required|string|',
             'Fecha_Final'=>'required|string|',
+            'gym'=>'required|string|',
         ];
 
         $mensaje=[

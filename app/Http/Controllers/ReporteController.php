@@ -28,7 +28,7 @@ class ReporteController extends Controller
     public function report_results(Request $request){
         $fi = $request->fecha_ini.' 00:00:00';
         $ff = $request->fecha_fin.' 23:59:59';
-        $ventas = Venta::whereBetween('sale_date', [$fi, $ff])->get();
+        $ventas = Venta::whereBetween('sale_date', [$fi, $ff])->paginate(10);
         $total = $ventas->sum('total');
 
         return view('reporte.reports_date', compact('ventas','total'));

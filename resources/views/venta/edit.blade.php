@@ -1,5 +1,5 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Editar Venta')
 @section('content')
 <div class="container-fluid">
     <div class="card">
@@ -109,31 +109,33 @@
     </div>    
 </div>
 
-@endsection
-<script>
-    window.onload = function(){
-        var fecha = new Date(); //fecha actual
-        var mes = fecha.getMonth()+1;//obteniendo mes
-        var dia = fecha.getDate();//obteniendo dia
-        var ano = fecha.getFullYear();//obteniendo año
-        if(dia<10){
-            dia='0'+dia;//agregar cero si es menor de 10
-        }            
-        if(mes<10){
-            mes='0'+mes;//agregar cero si es menor de 10
-        }            
-        document.getElementById('fecha_ini').value = ano+"-"+mes+"-"+dia;
-        document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
-    }
-    function seleccionado(){
-        var opt = $('#forma_pago').val();
-        
-        //alert(opt);
-        if(opt=="Credito"){
-            $('#credito').show();
+@stop
+@section('js')
+    <script>
+        window.onload = function(){
+            var fecha = new Date(); //fecha actual
+            var mes = fecha.getMonth()+1;//obteniendo mes
+            var dia = fecha.getDate();//obteniendo dia
+            var ano = fecha.getFullYear();//obteniendo año
+            if(dia<10){
+                dia='0'+dia;//agregar cero si es menor de 10
+            }            
+            if(mes<10){
+                mes='0'+mes;//agregar cero si es menor de 10
+            }            
+            document.getElementById('fecha_ini').value = ano+"-"+mes+"-"+dia;
+            document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
         }
-        if(opt=="Al contado"){
-            $('#credito').hide();
+        function seleccionado(){
+            var opt = $('#forma_pago').val();
+            
+            //alert(opt);
+            if(opt=="Credito"){
+                $('#credito').show();
+            }
+            if(opt=="Al contado"){
+                $('#credito').hide();
+            }
         }
-    }
-</script>
+    </script>
+@stop

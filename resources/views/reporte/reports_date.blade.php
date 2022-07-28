@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('adminlte::page')
 
 @section('content')
 <div class="container-fluid" >
@@ -63,20 +63,21 @@
         </div>
     </div>  
 </div>
-
-<script>
-    window.onload = function(){
-        var fecha = new Date(); //fecha actual
-        var mes = fecha.getMonth()+1;//obteniendo mes
-        var dia = fecha.getDate();//obteniendo dia
-        var ano = fecha.getFullYear();//obteniendo año
-        if(dia<10){
-            dia='0'+dia;//agregar cero si es menor de 10
-        }            
-        if(mes<10){
-            mes='0'+mes;//agregar cero si es menor de 10
-        }            
-        document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
-    }
-</script>
-@endsection
+@stop
+@section('js')
+    <script>
+        window.onload = function(){
+            var fecha = new Date(); //fecha actual
+            var mes = fecha.getMonth()+1;//obteniendo mes
+            var dia = fecha.getDate();//obteniendo dia
+            var ano = fecha.getFullYear();//obteniendo año
+            if(dia<10){
+                dia='0'+dia;//agregar cero si es menor de 10
+            }            
+            if(mes<10){
+                mes='0'+mes;//agregar cero si es menor de 10
+            }            
+            document.getElementById('fecha_fin').value = ano+"-"+mes+"-"+dia;
+        }
+    </script>
+@stop  

@@ -1,10 +1,12 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Venta')
 @section('content')
 <div class="container-fluid" >
 <div class="card">
     <div class="table-responsive card-body">
-        <a href="{{ url('venta/create') }}" class="btn btn-success">Resgitrar nueva Venta</a>
+        @can('admin.venta.create')
+            <a href="{{ url('venta/create') }}" class="btn btn-success">Resgitrar nueva Venta</a>
+        @endcan        
         <br><br>
         
         <form class="form-inline" action="{{ url('/venta') }}" method="GET">
@@ -36,16 +38,18 @@
                         <td class="text-center">{{ $venta['rest'] }} dias</td> 
                         <td class="text-center" style="background:{{ $venta['color'] }}"> {{ $venta['mensaje'] }}</td> 
                         <td width="50px">
-                            <a href="{{ url('/venta/'.$venta['id'].'/edit') }}" class="btn btn-warning">
-                                Editar
-                            </a>
+                            @can('admin.venta.update')
+                                <a href="{{ url('/venta/'.$venta['id'].'/edit') }}" class="btn btn-warning">Editar</a>
+                            @endcan                            
                         </td>           
                         <td width="50px">
-                            <form action="{{ url('/venta/'.$venta['id']) }}" class="d-inline" method="post">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
-                            </form>
+                            @can('admin.venta.destroy')
+                                <form action="{{ url('/venta/'.$venta['id']) }}" class="d-inline" method="post">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
+                                </form>
+                            @endcan                            
                         </td>
                         <td width="50px">
                             <a href="{{ url('/venta/pdf/'.$venta['id']) }}" type="button" class="btn btn-primary boton" >Imprimir</a>
@@ -59,4 +63,4 @@
 </div>
 </div>
 
-@endsection
+@stop

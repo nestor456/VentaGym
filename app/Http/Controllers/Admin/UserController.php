@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 
 use Spatie\Permission\Models\Role;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::all()->pluck('name','id');
         return view('users.create', compact('roles'));
     }
 
@@ -79,7 +80,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::all()->pluck('name','id');
+        $user->load('roles');
         return view('users.edite', compact('user','roles'));
     }
 

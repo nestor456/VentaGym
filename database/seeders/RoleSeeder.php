@@ -64,6 +64,7 @@ class RoleSeeder extends Seeder
     //venta
         Permission::create(['name'=>'admin.venta.index','description'=>'Ver listado de ventas'])->syncRoles([$role1]);
         Permission::create(['name'=>'admin.venta.create','description'=>'Crear venta'])->syncRoles([$role1]);
+        Permission::create(['name'=>'admin.venta.update','description'=>'Editar venta'])->syncRoles([$role1]);
         Permission::create(['name'=>'admin.venta.destroy','description'=>'Eliminar venta'])->assignRole([$role1]);
 
     //asistencia
@@ -71,7 +72,15 @@ class RoleSeeder extends Seeder
 
     //asistencia_cliente
         Permission::create(['name'=>'admin.asistencia_cliente.index','description'=>'ver asistencia de clientes'])->syncRoles([$role1]);
+
+    //Reporte por dia
+        Permission::create(['name'=>'reports.day','description'=>'reporte por dia'])->syncRoles([$role1]);
+    
+    //Reporte por mes
+        Permission::create(['name'=>'reports.date','description'=>'reporte por mes'])->syncRoles([$role1]);
+    
     }
+    
 
     
 }

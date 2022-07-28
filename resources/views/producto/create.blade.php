@@ -1,5 +1,4 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
 @section('content')
 <div class="container">
     <h1>Crear nuevo producto</h1>
@@ -12,4 +11,4 @@
         </div>
     </div>   
 </div>
-@endsection
+@stop

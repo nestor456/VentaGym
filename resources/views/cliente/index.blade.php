@@ -1,6 +1,7 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Clientes')
 @section('content')
+<br>
 @if(session('info'))
     <div class="alert alert-success">
         {{session('info')}}
@@ -9,7 +10,9 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a>
+        @can('admin.cliente.create')
+            <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a> 
+        @endcan        
         <br><br>
         <form class="form-inline" action="{{ url('/cliente') }}" method="GET">
             <input class="form-control mr-sm-2" name="texto" value="{{$texto}}" type="search" placeholder="Search" aria-label="Search">
@@ -45,16 +48,18 @@
                     <td class="text-center">{{ $cliente['congelar_membresia'] }}</td> 
                     <td class="text-center">{{ $cliente['rest'] }} dias</td>                         
                     <td width="50px">
-                        <a href="{{ url('/cliente/'.$cliente['id'].'/edit') }}" class="btn btn-warning">
-                            Editar
-                        </a>
+                        @can('admin.cliente.update')
+                            <a href="{{ url('/cliente/'.$cliente['id'].'/edit') }}" class="btn btn-warning">Editar</a>
+                        @endcan                        
                     </td>
                     <td width="50px">
-                        <form action="{{ url('/cliente/'.$cliente['id'] ) }}" class="d-inline" method="post">
-                            @csrf
-                            {{ method_field('DELETE') }}
-                            <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
-                        </form>
+                        @can('admin.cliente.destroy')
+                            <form action="{{ url('/cliente/'.$cliente['id'] ) }}" class="d-inline" method="post">
+                                @csrf
+                                {{ method_field('DELETE') }}
+                                <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
+                            </form>
+                        @endcan                        
                     </td>                       
                     </tr>
                 @endforeach                
@@ -64,4 +69,4 @@
     </div>
 </div>
 </div>
-@endsection
+@stop

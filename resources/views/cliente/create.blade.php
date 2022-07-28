@@ -1,5 +1,5 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Crear Clientes')
 @section('content')
 
 <div class="container-fluid">
@@ -14,17 +14,19 @@
     </div>
     
 </div>
-@endsection
-<script>
-    function seleccionado(){
-        var opt = $('#congelar_membresia').val();
-        
-        //alert(opt);
-        if(opt=="Activar"){
-            $('#credito').show();
+@stop
+@section('js')
+    <script>
+        function seleccionado(){
+            var opt = $('#congelar_membresia').val();
+            
+            //alert(opt);
+            if(opt=="Activar"){
+                $('#credito').show();
+            }
+            if(opt=="Desactivar"){
+                $('#credito').hide();
+            }
         }
-        if(opt=="Desactivar"){
-            $('#credito').hide();
-        }
-    }
-</script>
+    </script>
+@stop

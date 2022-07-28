@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('adminlte::page')
 
 @section('content')
 
@@ -15,4 +15,4 @@
     </form>
 </div>
 
-@endsection
+@stop

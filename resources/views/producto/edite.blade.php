@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('adminlte::page')
 
 @section('content')
 
@@ -14,4 +14,4 @@
         </div>
     </div>    
 </div>
-@endsection
+@stop

@@ -1,5 +1,5 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Crear Area')
 @section('content')
 
 <div class="container">
@@ -13,4 +13,4 @@
         </div>
     </div>    
 </div>
-@endsection
+@stop

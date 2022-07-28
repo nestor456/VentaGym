@@ -1,11 +1,13 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Empleados')
 @section('content')
+<br>
 @if(session('info'))
     <div class="alert alert-success">
         {{session('info')}}
     </div>
 @endif
+<br>
 <div class="container-fluid" >
 
     @if(Session::has('mensaje'))
@@ -15,7 +17,10 @@
     <div class="card">
         <div class="card-body">
             <div class="col-xl-12">
-                <a href="{{ url('empleado/create') }}" class="btn btn-success">Registrar nuevo empleado</a>
+                @can('admin.empleado.create')
+                    <a href="{{ url('empleado/create') }}" class="btn btn-success">Registrar nuevo empleado</a>                   
+                @endcan
+                
         <br><br>
     
         <form class="form-inline" action="{{ url('/empleado') }}" method="GET">
@@ -44,16 +49,19 @@
                         <td class="text-center">{{ $empleado->ApellidoMaterno }}</td>
                         <td class="text-center">{{ $empleado->Area }}</td>
                         <td width="50px">
-                            <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">
-                                Editar
-                             </a>
+                            @can('admin.empleado.update')
+                            <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">Editar</a>
+                            @endcan
+                            
                         </td> 
                         <td width="50px">
+                            @can('admin.empleado.destroy')
                             <form action="{{ url('/empleado/'.$empleado->id ) }}" class="d-inline" method="post">
                                 @csrf
                                 {{ method_field('DELETE') }}
                                 <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
                             </form>
+                            @endcan                            
                         </td> 
                          
                         
@@ -68,4 +76,4 @@
         </div>   
     </div>   
 </div>
-@endsection
+@stop

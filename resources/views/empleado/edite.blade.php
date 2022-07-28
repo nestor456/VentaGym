@@ -1,5 +1,5 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Editar Empleados')
 @section('content')
 <div class="container-fluid">
     <div class="card">
@@ -14,4 +14,4 @@
         </div>
     </div>    
 </div>
-@endsection
+@stop

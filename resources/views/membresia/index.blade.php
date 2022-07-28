@@ -1,6 +1,7 @@
-@extends('layouts.menu')
-
+@extends('adminlte::page')
+@section('title', 'Membresia')
 @section('content')
+<br>
 @if(session('info'))
     <div class="alert alert-success">
         {{session('info')}}
@@ -9,7 +10,10 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        <a href="{{ url('membresia/create') }}" class="btn btn-success">Registrar nueva Membresia</a>
+        @can('admin.membresia.create')
+            <a href="{{ url('membresia/create') }}" class="btn btn-success">Registrar nueva Membresia</a>
+        @endcan
+        
         <table class="table table-dark">
             <thead class="thead-light">
                 <th>#</th>
@@ -22,16 +26,18 @@
                     <td>{{ $membresia->id }}</td>
                     <td class="text-center">{{ $membresia->NombreMembresia }}</td>
                     <td width="50px">
-                        <a href="{{ url('/membresia/'.$membresia->id.'/edit') }}" class="btn btn-warning">
-                        Editar
-                     </a>
+                        @can('admin.membresia.update')
+                            <a href="{{ url('/membresia/'.$membresia->id.'/edit') }}" class="btn btn-warning"> Editar</a>
+                        @endcan                        
                     </td>
-                    <td width="50px">                       
-                        <form action="{{ url('/membresia/'.$membresia->id ) }}" class="d-inline" method="post">
-                            @csrf
-                            {{ method_field('DELETE') }}                            
-                            <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar">
-                        </form>
+                    <td width="50px">
+                        @can('admin.membresia.destroy')
+                            <form action="{{ url('/membresia/'.$membresia->id ) }}" class="d-inline" method="post">
+                                @csrf
+                                {{ method_field('DELETE') }}                            
+                                <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar">
+                            </form>
+                        @endcan                                        
                     </td>                                        
                 </tr>
                  @endforeach
@@ -42,4 +48,4 @@
 </div>
 </div>
 
-@endsection
+@stop

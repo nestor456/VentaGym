@@ -40,20 +40,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $campos=[
-            'name'=>'required|string|max:100'
-        ];
-        $mensaje=[
-            'required'=>'El :attribute es requerido'
-        ];
-        
-        $this->validate($request, $campos, $mensaje);
-
-        $role = Role::create($request->all());
-
-        $role->permissions()->sync($request->permission);
-
-        return redirect()->route('admin.roles.index', $role)->with('info','El rol se creó con éxito');
+        $role = Role::create($request->only('name'));
+        $role->permissions()->sync($request->input('permissions', []));
+        return redirect()->route('admin.roles.index')->with('info','El rol se creó con éxito');
 
     }
 
@@ -76,7 +65,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $permissions = Permission::all();
+        $permissions = Permission::all()->pluck('name','id');
+        $role->load('permissions');
         return view('roles.edite', compact('role','permissions'));
     }
 
@@ -89,16 +79,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $campos=[
-            'name'=>'required|string|max:100'
-        ];
-        $mensaje=[
-            'required'=>'El :attribute es requerido'
-        ];
-        
-        $this->validate($request, $campos, $mensaje);
         $role->update($request->all());
-        $role->permissions()->sync($request->permission);
+        $role->permissions()->sync($request->input('permissions', []));
         return redirect()->route('admin.roles.index')->with('info','El rol se actualizo con éxito');
 
     }

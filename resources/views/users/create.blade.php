@@ -5,7 +5,7 @@
     <h1>Crear nuevo usuario</h1>
     <div class="card">
         <div class="card-body">
-            <form action="{{route('admin.users.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label name="name">Nombre</label>

@@ -6,11 +6,13 @@ use Carbon\Carbon;
 use App\Models\Venta;
 use App\Models\Reporte;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ReporteController extends Controller
 {
     public function reports_day(){
-
+        
+        abort_if(Gate::denies('reports.day'), 403);
         $ventas = Venta::whereDate('sale_date', Carbon::today('America/Lima'))->get();
         $total = $ventas->sum('total');
         
@@ -19,6 +21,7 @@ class ReporteController extends Controller
 
     public function reports_date(){
 
+        abort_if(Gate::denies('reports.date'), 403);
         $ventas = Venta::whereDate('sale_date', Carbon::today('America/Lima'))->get();
         $total = $ventas->sum('total');
 

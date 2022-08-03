@@ -1,72 +1,103 @@
 @extends('adminlte::page')
+
 @section('title', 'Clientes')
+
 @section('content')
-<br>
 @if(session('info'))
     <div class="alert alert-success">
         {{session('info')}}
     </div>
 @endif
-<div class="container-fluid" >
-<div class="card">
-    <div class="card-body table-responsive">
-        @can('admin.cliente.create')
-            <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a> 
-        @endcan        
-        <br><br>
-        <form class="form-inline" action="{{ url('/cliente') }}" method="GET">
-            <input class="form-control mr-sm-2" name="texto" value="{{$texto}}" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-        <br>
-        <table class="table table-striped table-dark" name="tabla-cliente" id="tabla-cliente" >
-            <thead class="thead-light">
-                <th class="text-center">Foto</th>
-                <th class="text-center">Sede</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">A.Paterno</th>
-                <th class="text-center">dni</th>
-                <th class="text-center">Membresía</th>
-                <th class="text-center">Entrenador</th>
-                <th class="text-center">Congelar Membresia</th>              
-                <th class="text-center">Dias Restantes</th>
-                <th class="text-center" colspan="2">Acciones</th>
-            </thead>
-            <tbody>
-                @foreach($details as $cliente)
-                    
-                    <tr>
-                    <td class="text-center">
-                        <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente['Foto'] }}" width="100" alt=""> 
-                    </td>
-                    <td class="text-center">{{ $cliente['gym'] }}</td>
-                    <td class="text-center">{{ $cliente['Nombre'] }}</td>
-                    <td class="text-center">{{ $cliente['ApellidoPaterno'] }}</td>
-                    <td class="text-center">{{ $cliente['dni'] }}</td>
-                    <td class="text-center">{{ $cliente['Membresia'] }}</td>
-                    <td class="text-center">{{ $cliente['Entrenador'] }}</td>
-                    <td class="text-center">{{ $cliente['congelar_membresia'] }}</td> 
-                    <td class="text-center">{{ $cliente['rest'] }} dias</td>                         
-                    <td width="50px">
-                        @can('admin.cliente.update')
-                            <a href="{{ url('/cliente/'.$cliente['id'].'/edit') }}" class="btn btn-warning">Editar</a>
-                        @endcan                        
-                    </td>
-                    <td width="50px">
-                        @can('admin.cliente.destroy')
-                            <form action="{{ url('/cliente/'.$cliente['id'] ) }}" class="d-inline" method="post">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
-                            </form>
-                        @endcan                        
-                    </td>                       
-                    </tr>
-                @endforeach                
-            </tbody>
-        </table>
-        {!! $datos->links() !!}
+@if(session('danger'))
+    <div class="alert alert-danger">
+        {{session('danger')}}
     </div>
+@endif
+<div class="container-fluid">
+    <div class="card">
+        @can('cliente.create')
+        <div class="card-body">
+            <a href="{{ url('cliente/create') }}" class="btn btn-success">Registrar nueva Cliente</a>
+        </div>
+        @endcan        
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Fecha de Creacón</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Tipo de Documento</th>
+                            <th>N°</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Género</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Departamento</th>
+                            <th>Provinvia</th>
+                            <th>Distrito</th>
+                            <th>Rason Social</th>
+                            <th>Ruc</th>
+                            <th>Rubro</th>
+                            <th>Pagina web</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($clientes as $cliente)
+                        <tr>
+                            <th class="text-center">{{$cliente->id}}</th>
+                            <th class="text-center">{{$cliente->nombre}}</th>
+                            <th class="text-center">{{$cliente->apellido}}</th>
+                            <th class="text-center">{{$cliente->tipo_doc}}</th>
+                            <th class="text-center">{{$cliente->number_doc}}</th>
+                            <th class="text-center">{{$cliente->fecha_naci}}</th>
+                            <th class="text-center">{{$cliente->genero}}</th>
+                            <th class="text-center">{{$cliente->correo}}</th>
+                            <th class="text-center">{{$cliente->telefono}}</th>
+                            <th class="text-center">{{$cliente->direccion}}</th>
+                            <th class="text-center">{{$cliente->departamento}}</th>
+                            <th class="text-center">{{$cliente->provincia}}</th>
+                            <th class="text-center">{{$cliente->distrito}}</th>
+                            <th class="text-center">{{$cliente->razon_social}}</th>
+                            <th class="text-center">{{$cliente->ruc}}</th>
+                            <th class="text-center">{{$cliente->rubro}}</th>
+                            <th class="text-center">{{$cliente->pagina_web}}</th>
+                            <th class="text-center">
+                                @can('cliente.update')
+                                    <a href="{{ url('/cliente/'.$cliente->id.'/edit') }}" class="btn btn-warning">Editar</a>
+                                @endcan
+                            </th>
+                            <th class="text-center">
+                                @can('cliente.destroy')
+                                <form action="{{ url('/cliente/'.$cliente->id ) }}" class="d-inline" method="post">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
+                                </form>
+                                @endcan                                
+                        </th>                                       
+                        </tr>
+                        @endforeach 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{ $clientes->links() }}
+        </div>
 </div>
-</div>
+
+@endsection
+@section('js')
+    <script>
+        $('#myTab').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+          })
+    </script>
 @stop

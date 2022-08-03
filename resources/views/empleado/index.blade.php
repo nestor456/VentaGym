@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <div class="col-xl-12">
-                @can('admin.empleado.create')
+                @can('empleado.create')
                     <a href="{{ url('empleado/create') }}" class="btn btn-success">Registrar nuevo empleado</a>                   
                 @endcan
                 
@@ -49,13 +49,13 @@
                         <td class="text-center">{{ $empleado->ApellidoMaterno }}</td>
                         <td class="text-center">{{ $empleado->Area }}</td>
                         <td width="50px">
-                            @can('admin.empleado.update')
+                            @can('empleado.update')
                             <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">Editar</a>
                             @endcan
                             
                         </td> 
                         <td width="50px">
-                            @can('admin.empleado.destroy')
+                            @can('empleado.destroy')
                             <form action="{{ url('/empleado/'.$empleado->id ) }}" class="d-inline" method="post">
                                 @csrf
                                 {{ method_field('DELETE') }}

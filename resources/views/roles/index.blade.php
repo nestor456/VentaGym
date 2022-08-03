@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-success">Registrar nueva Role</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-success">Registrar nueva Role</a>
         </div>
     </div>
         <div class="card">

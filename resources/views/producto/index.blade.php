@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-body table-responsive">
 
-        @can('admin.producto.create')
+        @can('producto.create')
         <a href="{{ url('producto/create') }}" class="btn btn-success">Resgitrar nueva Producto</a> 
         @endcan
 
@@ -32,7 +32,7 @@
                     <td class="text-center">{{ $producto->precio }}</td>
 
                     <td width="50px">
-                        @can('admin.producto.update')
+                        @can('producto.update')
                         <a href="{{ url('/producto/'.$producto->id.'/edit') }}" class="btn btn-warning">
                             Editar
                          </a> 
@@ -42,7 +42,7 @@
                         <form action="{{ url('/producto/'.$producto->id ) }}" class="d-inline" method="post">
                             @csrf
                             {{ method_field('DELETE') }}
-                            @can('admin.producto.destroy')
+                            @can('producto.destroy')
                             <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
                             @endcan
                         </form>

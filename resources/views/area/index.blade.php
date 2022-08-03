@@ -9,7 +9,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        @can('admin.area.create')
+        @can('area.create')
             <a href="{{ url('area/create') }}" class="btn btn-success">Registrar nueva Area</a>
         @endcan        
         <br><br>
@@ -25,12 +25,12 @@
                     <td>{{ $area->id }}</td>
                     <td class="text-center">{{ $area->Nombre }}</td>
                     <td width="50px">
-                        @can('admin.area.update')
+                        @can('area.update')
                             <a href="{{ url('/area/'.$area->id.'/edit') }}" class="btn btn-warning">Editar</a>
                         @endcan                        
                     </td>
                      <td width="50px">
-                        @can('admin.area.destroy')
+                        @can('area.destroy')
                             <form action="{{ url('/area/'.$area->id ) }}" class="d-inline" method="post">
                                 @csrf
                                 {{ method_field('DELETE') }}

@@ -5,7 +5,7 @@
     <div class="main-section">
         <div class="container">
             <div class="col-lg-10 col-md-10">
-                <form action="{{ route('admin.roles.update', $role) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('roles.update', $role) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     {{method_field('PATCH')}}
                     <div class="card">

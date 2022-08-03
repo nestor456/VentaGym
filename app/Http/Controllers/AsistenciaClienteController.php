@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Asistencia_cliente;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 
 class AsistenciaClienteController extends Controller
@@ -16,6 +17,7 @@ class AsistenciaClienteController extends Controller
      */
     public function index(Request $request)
     {
+        abort_if(Gate::denies('asistencia_cliente.index'), 403);
         $asistencias = Asistencia_cliente::whereDate('fecha', Carbon::today('America/Lima'))->get();
         return view('asistencia_cliente.index', compact('asistencias'));
         

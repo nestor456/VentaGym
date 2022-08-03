@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class EmpleadoController extends Controller
 {
@@ -19,6 +20,9 @@ class EmpleadoController extends Controller
     public function index(Request $request)
     {
         //
+        abort_if(Gate::denies('empleado.index'), 403);
+
+
         $texto = trim($request->get('texto'));
 
        $empleados = DB::table('empleados')
@@ -44,6 +48,7 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
+        abort_if(Gate::denies('empleado.create'), 403);
         $areas = Area::all();
         return view('empleado.create', compact('areas'));
     }
@@ -108,6 +113,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('empleado.update'), 403);
         $areas = Area::all();
         $empleado = Empleado::findOrFail($id);
         return view('empleado.edite', compact('empleado','areas'));
@@ -148,6 +154,7 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(Gate::denies('empleado.destroy'), 403);
         //
         Empleado::destroy($id);
         

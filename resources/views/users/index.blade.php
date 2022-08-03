@@ -14,7 +14,7 @@
 @endif 
 <div class="card">
     <div class="card-body">
-        <a class="btn btn-success" href="{{route('admin.users.create')}}">Nuevo usuario</a>
+        <a class="btn btn-success" href="{{route('users.create')}}">Nuevo usuario</a>
     </div>
 </div>     
 <div class="card">        
@@ -47,7 +47,7 @@
                             </a>
                         </td>
                         <td width="50px">
-                            <form action="{{route('admin.users.destroy',$user)}}" method="post">
+                            <form action="{{route('users.destroy',$user)}}" method="post">
                                 @csrf
                                 {{ method_field('DELETE') }}
                                 <button type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger">Eliminar</button>

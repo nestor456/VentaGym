@@ -6,7 +6,7 @@
     <div class="main-section">
         <div class="container">
             <div class="col-lg-10 col-md-10">
-                <form action="{{route('admin.roles.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('roles.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-header">

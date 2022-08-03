@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
-use App\Models\Empleado;
-use App\Models\Membresia;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use ILLuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class ClienteController extends Controller
 {
@@ -18,11 +17,14 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $texto = trim($request->get('texto'));
+        abort_if(Gate::denies('cliente.index'), 403);
 
-       $datos = DB::table('clientes')
+        
+        $clientes = Cliente::paginate(15); 
+    /*$texto = trim($request->get('texto'));
+      $datos = DB::table('clientes')
                     ->select('id','Nombre', 'ApellidoPaterno', 'ApellidoMaterno','dni','Telefono','Correo','Membresia','Entrenador','Objetivo_fisico','Foto','Fecha_Inicio','Fecha_Final','gym','congelar_membresia','observacion','deleted_at')
                     ->where('dni','LIKE','%'.$texto.'%')
                     ->paginate(10);
@@ -56,9 +58,9 @@ class ClienteController extends Controller
                 'rest' => $fecha_fin->diffInDays($now)   
             ];
            }            
-        }
+        }*/
         //dd($details);
-        return view('cliente.index', compact('datos','details','texto'));
+        return view('cliente.index', compact('clientes'));
     }
 
     /**
@@ -69,9 +71,8 @@ class ClienteController extends Controller
     public function create()
     {
         //
-        $empleados = Empleado::all();
-        $menbresias = Membresia::all();
-        return view('cliente.create', compact('empleados','menbresias'));
+        abort_if(Gate::denies('cliente.create'), 403);
+        return view('cliente.create');
     }
 
     /**
@@ -82,7 +83,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $campos=[
+        /*$campos=[
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -100,10 +101,10 @@ class ClienteController extends Controller
         $mensaje=[
             'required'=>'El :attribute es requerido'
         ];
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos, $mensaje);*/
 
-        $validator = Validator::make(['dni' => $request->get('dni')], [
-            'dni' => 'required|string|max:8|unique:clientes',
+        $validator = Validator::make(['number_doc' => $request->get('number_doc')], [
+            'number_doc' => 'required|string|max:8|unique:clientes',
         ]);
 
         if ($validator->fails()) {
@@ -112,12 +113,8 @@ class ClienteController extends Controller
 
         $datosCliente = request()->except('_token'); 
 
-        if($request->hasFile('Foto')){
-
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
-
-        }
         Cliente::insert($datosCliente);
+
         return redirect('cliente')->with('info','El cliente se creó con éxito');
     }
 
@@ -141,10 +138,9 @@ class ClienteController extends Controller
     public function edit($id)
     {
         //
+        abort_if(Gate::denies('cliente.update'), 403);
         $cliente = Cliente::findOrFail($id);
-        $empleados = Empleado::all();
-        $menbresias = Membresia::all();
-        return view('cliente.edite', compact('cliente','empleados','menbresias'));
+        return view('cliente.edite', compact('cliente'));
     }
 
     /**
@@ -157,7 +153,7 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
+        /*$request->validate([
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -169,15 +165,9 @@ class ClienteController extends Controller
             'Objetivo_fisico'=>'required|string|max:100',
             'Fecha_Inicio'=>'required|string|',
             'Fecha_Final'=>'required|string|',
-        ]);
+        ]);*/
 
         $datosCliente = request()->except(['_token','_method']);
-
-        if($request->hasFile('Foto')){
-
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
-
-        }
         
         Cliente::where('id','=',$id)->update($datosCliente);
         return redirect('cliente')->with('info','El cliente se edito con éxito');
@@ -192,6 +182,7 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+        abort_if(Gate::denies('cliente.destroy'), 403);
         Cliente::destroy($id);
         return redirect('cliente')->with('info','El cliente se elimino con éxito');
     }

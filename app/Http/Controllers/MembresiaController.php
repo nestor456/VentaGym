@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Membresia;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class MembresiaController extends Controller
 {
@@ -15,6 +17,7 @@ class MembresiaController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('membresia.index'), 403);
         //$datos['membresias'] = Membresia::paginate(10);
         $membresias = Membresia::paginate(10);
         return view('membresia.index',compact('membresias'));
@@ -28,6 +31,7 @@ class MembresiaController extends Controller
     public function create()
     {
         //
+        abort_if(Gate::denies('membresia.create'), 403);
         return view('membresia.create');
     }
 
@@ -83,6 +87,7 @@ class MembresiaController extends Controller
     public function edit($id)
     {
         //
+        abort_if(Gate::denies('membresia.update'), 403);
         $membresia = Membresia::findOrFail($id);
         return view('membresia.edite', compact('membresia'));
     }
@@ -118,6 +123,7 @@ class MembresiaController extends Controller
     public function destroy($id)
     {
         //
+        abort_if(Gate::denies('membresia.destroy'), 403);
         Membresia::destroy($id);
         return redirect('membresia')->with('info','La membresia se elimino con éxito');
     }

@@ -15,25 +15,26 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre');
-            $table->string('ApellidoPaterno');
-            $table->string('ApellidoMaterno');
-            $table->string('dni');
-            $table->string('Telefono');
-            $table->string('Correo');
-            $table->string('Membresia');
-            //$table->string('Promocion');
-            $table->string('Entrenador');
-            $table->text('Objetivo_fisico');
-            $table->string('Foto')->nullable();
-
-            $table->string('congelar_membresia');
-            $table->string('observacion')->nullable();
-            $table->string('deuda')->nullable();
-            $table->string('gym')->nullable();
-
-            $table->string('Fecha_Inicio');
-            $table->string('Fecha_Final');
+            $table->string('tipo_cp');
+            $table->string('fecha');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('tipo_doc');
+            $table->integer('number_doc');
+            $table->string('fecha_naci');
+            $table->string('genero');
+            $table->string('categoria1')->nullable();
+            $table->string('categoria2')->nullable();
+            $table->integer('telefono')->nullable();
+            $table->string('correo')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('departamento')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('distrito')->nullable();
+            $table->string('razon_social')->nullable();
+            $table->string('ruc')->nullable();
+            $table->string('rubro')->nullable();
+            $table->string('pagina_web')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

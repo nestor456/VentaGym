@@ -43,17 +43,17 @@ Route::group(['middleware' => 'auth'], function() {
     //
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resource('empleado',EmpleadoController::class)->names('admin.empleado');
-    Route::resource('area',AreaController::class)->names('admin.area');
-    Route::resource('membresia',MembresiaController::class)->names('admin.membresia');
-    Route::resource('producto',ProductoController::class)->names('admin.producto');
-    Route::resource('cliente',ClienteController::class)->names('admin.cliente');
-    Route::resource('venta',VentaController::class)->names('admin.venta');
-    Route::resource('asistencia',AsistenciaController::class)->names('admin.asistencia');
-    Route::resource('asistencia_cliente',AsistenciaClienteController::class)->names('admin.asistencia_cliente');
+    Route::resource('empleado',EmpleadoController::class)->names('empleado');
+    Route::resource('area',AreaController::class)->names('area');
+    Route::resource('membresia',MembresiaController::class)->names('membresia');
+    Route::resource('producto',ProductoController::class)->names('producto');
+    Route::resource('cliente',ClienteController::class)->names('cliente');
+    Route::resource('venta',VentaController::class)->names('venta');
+    Route::resource('asistencia',AsistenciaController::class)->names('asistencia');
+    Route::resource('asistencia_cliente',AsistenciaClienteController::class)->names('asistencia_cliente');
 
-    Route::resource('users', UserController::class)->names('admin.users');
-    Route::resource('roles', RoleController::class)->names('admin.roles');
+    Route::resource('users', UserController::class)->names('users');
+    Route::resource('roles', RoleController::class)->names('roles');
     
     Route::get('venta/pdf/{venta}', [VentaController::class, 'pdf'])->name('venta.pdf');
     

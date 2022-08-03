@@ -11,13 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Auth;
+use Illuminate\Support\Facades\Gate;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
 class VentaController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
+        abort_if(Gate::denies('venta.index'), 403);
+
         $texto = trim($request->get('texto'));
 
         $datos = Venta::where('id','like','%'.$texto.'%')->paginate(10);               
@@ -73,6 +76,7 @@ class VentaController extends Controller
 
     public function create()
     {
+        abort_if(Gate::denies('venta.index'), 403);
         $clientes = Cliente::get();
         $productos = Producto::get();
         $pagos = Pagos::get();
@@ -123,6 +127,7 @@ class VentaController extends Controller
 
     public function edit($id)
     {
+        abort_if(Gate::denies('venta.index'), 403);
         $venta = Venta::findOrFail($id);
         $clientes = Cliente::where('id',$venta->cliente_id)->get();
         $pagos = Pagos::all();
@@ -158,8 +163,9 @@ class VentaController extends Controller
 
      function destroy($id)
     {
+        abort_if(Gate::denies('venta.index'), 403);
         Venta::destroy($id);
-        return redirect()->route('admin.venta.index')->with('info','La venta se eliminado con éxito');
+        return redirect()->route('venta.index')->with('info','La venta se eliminado con éxito');
     }
 
     public function pdf($id)

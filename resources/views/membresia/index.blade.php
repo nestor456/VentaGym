@@ -10,7 +10,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="card-body table-responsive">
-        @can('admin.membresia.create')
+        @can('membresia.create')
             <a href="{{ url('membresia/create') }}" class="btn btn-success">Registrar nueva Membresia</a>
         @endcan
         
@@ -26,12 +26,12 @@
                     <td>{{ $membresia->id }}</td>
                     <td class="text-center">{{ $membresia->NombreMembresia }}</td>
                     <td width="50px">
-                        @can('admin.membresia.update')
+                        @can('membresia.update')
                             <a href="{{ url('/membresia/'.$membresia->id.'/edit') }}" class="btn btn-warning"> Editar</a>
                         @endcan                        
                     </td>
                     <td width="50px">
-                        @can('admin.membresia.destroy')
+                        @can('membresia.destroy')
                             <form action="{{ url('/membresia/'.$membresia->id ) }}" class="d-inline" method="post">
                                 @csrf
                                 {{ method_field('DELETE') }}                            

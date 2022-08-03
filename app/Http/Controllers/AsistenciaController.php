@@ -6,6 +6,7 @@ use App\Models\Asistencia;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 
 class AsistenciaController extends Controller
@@ -18,7 +19,7 @@ class AsistenciaController extends Controller
     public function index()
     {
         //
-
+        abort_if(Gate::denies('asistencia.index'), 403);
         $asistencias = Asistencia::whereDate('fecha', Carbon::today('America/Lima'))->get();
         return view('asistencia.index', compact('asistencias'));
         

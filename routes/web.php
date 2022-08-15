@@ -13,6 +13,9 @@ use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\AsistenciaClienteController;
+use App\Http\Controllers\ProvidesController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\SubCategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,8 +47,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('empleado',EmpleadoController::class)->names('empleado');
-    Route::resource('area',AreaController::class)->names('area');
-    Route::resource('membresia',MembresiaController::class)->names('membresia');
+    //Route::resource('area',AreaController::class)->names('area');
+    //Route::resource('membresia',MembresiaController::class)->names('membresia');
     Route::resource('producto',ProductoController::class)->names('producto');
     Route::resource('cliente',ClienteController::class)->names('cliente');
     Route::resource('venta',VentaController::class)->names('venta');
@@ -54,7 +57,13 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('users', UserController::class)->names('users');
     Route::resource('roles', RoleController::class)->names('roles');
-    
+    Route::resource('provides', ProvidesController::class)->names('provides');
+
+    Route::resource('categories', CategoriesController::class)->names('categories');
+    Route::resource('subcategories', SubCategoriesController::class)->names('subcategories');
+
+
+    Route::get('producto/subCategory/{id}',  [ProductoController::class, 'bySubCategory']);    
     Route::get('venta/pdf/{venta}', [VentaController::class, 'pdf'])->name('venta.pdf');
     
     Route::get('reporte/reports_day',[ReporteController::class, 'reports_day'])->name('reports.day');

@@ -56,7 +56,7 @@ class UserController extends Controller
 
         $users->roles()->sync($request->roles);
 
-        return redirect()->route('admin.users.index')->with('info','El rol se creó con éxito');
+        return redirect()->route('users.index')->with('info','El rol se creó con éxito');
 
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
 
         $user->roles()->sync($request->roles);
 
-        return redirect()->route('admin.users.index')->with('info','el usuario se ha actualizado');
+        return redirect()->route('users.index')->with('info','el usuario se ha actualizado');
     }
     /**
      * Remove the specified resource from storage.
@@ -125,7 +125,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('info','El usuario se eliminado con éxito');
+        return redirect()->route('users.index')->with('info','El usuario se eliminado con éxito');
 
     }
 }

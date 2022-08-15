@@ -279,22 +279,33 @@ return [
             'can'=>'cliente.index',            
         ],
         [
-            'text' => 'Area',
-            'route'  => 'area.index',
-            'icon_color' => 'cyan',
-            'can'=>'area.index',            
-        ],
-        [
-            'text' => 'Membresia',
-            'route'  => 'membresia.index', 
-            'icon_color' => 'cyan', 
-            'can'=>'membresia.index',          
-        ],
-        [
-            'text' => 'Productos',
-            'route'  => 'producto.index',
-            'icon_color' => 'cyan',
-            'can'=>'producto.index',            
+            'text' => 'Inventarios',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Proveedores',
+                    'url'  => '/provides',                   
+                ],
+                [
+                    'text' => 'Categorías',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'submenu' => [
+                        [
+                            'text' => 'Categorias',
+                            'url'  => '/categories',
+                        ],
+
+                        [
+                            'text' => 'Sub categorias',
+                            'url'  => '/subcategories',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Productos',
+                    'url'  => '/producto',
+                ],
+            ],         
         ],
         [
             'text' => 'Ventas',

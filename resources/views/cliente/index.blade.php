@@ -45,7 +45,7 @@
                             <th>Ruc</th>
                             <th>Rubro</th>
                             <th>Pagina web</th>
-                            <th>Acciones</th>
+                            <th colspan="2">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>

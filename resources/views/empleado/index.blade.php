@@ -36,7 +36,6 @@
                         <th class="text-center">Nombre</th>
                         <th class="text-center">A.Paterno</th>
                         <th class="text-center">A.Materno</th>
-                        <th class="text-center">Area</th>
                         <th class="text-center" colspan="2">Acciones</th>
                     </tr>
                 </thead>
@@ -47,7 +46,6 @@
                         <td class="text-center">{{ $empleado->Nombre }}</td>
                         <td class="text-center">{{ $empleado->ApellidoPaterno }}</td>
                         <td class="text-center">{{ $empleado->ApellidoMaterno }}</td>
-                        <td class="text-center">{{ $empleado->Area }}</td>
                         <td width="50px">
                             @can('empleado.update')
                             <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">Editar</a>

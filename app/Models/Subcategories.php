@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Producto extends Model
+
+class Subcategories extends Model
 {
-    use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['NombreProducto', 'Detalle', 'stock','precio','idcategoria', 'idsubcategoria','idproveedor'];
+    protected $fillable = ['category_id','fecha_creacion', 'name','description'];
 }

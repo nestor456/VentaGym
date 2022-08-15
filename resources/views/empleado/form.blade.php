@@ -43,20 +43,7 @@
         <div class="form-group">
             <label for="Domicilio">Domicilio</label>
         <input type="text" name="Domicilio" id="Domicilio" class="form-control" value="{{ isset($empleado->Domicilio)?$empleado->Domicilio:'' }}">
-        </div>
-
-        <div class="form-group">
-            <label for="Area">Area</label>
-                <select name="Area" id="Area" class="form-control">
-                    <option value="{{ isset($empleado->Area)?$empleado->Area:'' }}" hidden selected>{{ isset($empleado->Area)?$empleado->Area:'' }}</option>
-                    @foreach($areas as $area )
-                        <option value="{{ $area['Nombre'] }}">{{ $area['Nombre'] }}</option>
-                    @endforeach
-                    
-                </select>
-        </div>
-
-        
+        </div>       
 
         <input type="submit" value="{{ $modo }} Datos" class="btn btn-success">
 

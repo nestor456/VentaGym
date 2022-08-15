@@ -13,14 +13,14 @@
 @section('js')
     <script>
         function seleccionado(){
-            var opt = $('#congelar_membresia').val();
+            var opt = $('#tipo_cp').val();
             
             //alert(opt);
-            if(opt=="Activar"){
-                $('#credito').show();
+            if(opt=="Empresa"){
+                $('#empresa').show();
             }
-            if(opt=="Desactivar"){
-                $('#credito').hide();
+            if(opt=="Persona Natural"){
+                $('#empresa').hide();
             }
         }
     </script>

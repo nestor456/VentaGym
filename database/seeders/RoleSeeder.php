@@ -38,7 +38,7 @@ class RoleSeeder extends Seeder
        Permission::create(['name'=>'empleado.destroy','description'=>'Eliminar empleado'])->assignRole([$role1]);
 
     //area
-        Permission::create(['name'=>'area.index','description'=>'Ver listado de areas'])->assignRole([$role1]);
+        /*Permission::create(['name'=>'area.index','description'=>'Ver listado de areas'])->assignRole([$role1]);
         Permission::create(['name'=>'area.create','description'=>'Crear area'])->assignRole([$role1]);
         Permission::create(['name'=>'area.update','description'=>'Editar area'])->assignRole([$role1]);
         Permission::create(['name'=>'area.destroy','description'=>'Eliminar area'])->assignRole([$role1]);
@@ -47,7 +47,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'membresia.index','description'=>'Ver listado de membresias'])->assignRole([$role1]);
         Permission::create(['name'=>'membresia.create','description'=>'Crear menbresia'])->assignRole([$role1]);
         Permission::create(['name'=>'membresia.update','description'=>'Editar membresia'])->assignRole([$role1]);
-        Permission::create(['name'=>'membresia.destroy','description'=>'Eliminar membresia'])->assignRole([$role1]);
+        Permission::create(['name'=>'membresia.destroy','description'=>'Eliminar membresia'])->assignRole([$role1]);*/
 
     //producto
         Permission::create(['name'=>'producto.index','description'=>'Ver listado de productos'])->assignRole([$role1]);

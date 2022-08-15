@@ -26,12 +26,12 @@
                     <select class="form-control" name="client_id" id="client_id">
                         <option value="" disabled selected>Seleccione al Cliente</option>
                         @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id}}_{{ $cliente->dni}}">{{$cliente->Nombre}} {{$cliente->ApellidoPaterno}} {{$cliente->ApellidoMaterno}}</option>
+                            <option value="{{ $cliente->id}}_{{ $cliente->number_doc}}">{{$cliente->nombre}} {{$cliente->apellido}}</option>
                         @endforeach
                     </select>
                 </div>     
 
-                <div class="form-group" hidden>
+                <div class="form-group">
                     <input type="text" name="cliente_id" id="cliente_id" class="form-control">
                     <input type="text" name="dni" id="dni" class="form-control">
                 </div>

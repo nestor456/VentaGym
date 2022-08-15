@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model
 {
-    protected $fillable = ['Nombre', 'ApellidoPaterno', 'ApellidoMaterno', 'dni', 'Telefono', 'Correo', 'Domicilio', 'Area'];
+    protected $fillable = ['Nombre', 'ApellidoPaterno', 'ApellidoMaterno', 'dni', 'Telefono', 'Correo', 'Domicilio'];
 
 }

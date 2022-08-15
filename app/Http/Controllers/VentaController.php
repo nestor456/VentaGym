@@ -50,9 +50,8 @@ class VentaController extends Controller
                     $details[] = [
                         'id'=> $data->id,
                         'cliente_id'=> $data->cliente_id,
-                        'Nombre'=> $cliente->Nombre, 
-                        'ApellidoPaterno'=> $cliente->ApellidoPaterno, 
-                        'ApellidoMaterno'=> $cliente->ApellidoMaterno,
+                        'nombre'=> $cliente->nombre, 
+                        'apellido'=> $cliente->apellido,
                         'dni'=> $data->dni,
                         'user_id'=> $data->user_id,
                         'forma_pago'=> $data->forma_pago,

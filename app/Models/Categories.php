@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Producto extends Model
+
+class Categories extends Model
 {
-    use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['NombreProducto', 'Detalle', 'stock','precio','idcategoria', 'idsubcategoria','idproveedor'];
+    protected $fillable = ['fecha_creacion', 'name','description'];
+
+    public function subCategorias(){
+        return $this->hasMany(Subcategories::class);
+    }  
 }

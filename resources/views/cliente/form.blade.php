@@ -25,23 +25,17 @@
                         <h5 class="card-header">Registro de Clientes</h5>
                         <div class="card-body">
                                   <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body">                                      
                                       <table class="table table-bordered">
                                         <thead>
                                           <tr>
-                                            <th scope="col">
-                                              <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="tipo_cp" id="inlineRadio1" value="Persona Natural">
-                                                <label class="form-check-label" for="inlineRadio1">Persona Natural</label>
-                                              </div>              
+                                            <th>
+                                              <select class="form-control" aria-label="Default select example" name="tipo_cp" id="tipo_cp" onchange="seleccionado()">
+                                                <option value="Persona Natural" selected>Persona Natural</option>
+                                                <option value="Empresa">Empresa</option>
+                                              </select>
                                             </th>
-                                            <th scope="col">
-                                              <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="tipo_cp"  id="inlineRadio2" value="Empresa">
-                                                <label class="form-check-label" for="inlineRadio2">Empresa</label>
-                                              </div>
-                                            </th>
-                                            <th scope="col"><input type="date" class="form-control" name="fecha"></th>
+                                            <th scope="col"><input type="date" class="form-control" name="fecha"></th> 
                                           </tr>
                                         </thead>
                                       </table>
@@ -49,6 +43,7 @@
                                   </div><br>
                                 
                                   <div class="card">
+                                    <h5 class="card-header">Persona</h5>
                                     <div class="card-body">
                                       <table class="table table-bordered">
                                           <thead>
@@ -101,7 +96,8 @@
                                     </div>
                                   </div>
                                 
-                                  <div class="card">
+                                  <div class="card" style="display:none;" id="empresa">
+                                    <h5 class="card-header">Empresa</h5>
                                     <div class="card-body">
                                       <table class="table table-bordered">
                                         <thead>

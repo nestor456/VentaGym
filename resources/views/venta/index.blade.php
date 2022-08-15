@@ -4,7 +4,7 @@
 <div class="container-fluid" >
 <div class="card">
     <div class="table-responsive card-body">
-        @can('admin.venta.create')
+        @can('venta.create')
             <a href="{{ url('venta/create') }}" class="btn btn-success">Resgitrar nueva Venta</a>
         @endcan        
         <br><br>
@@ -30,7 +30,7 @@
                 @foreach($details as $venta)                    
                     <tr>
                         <td class="text-center">{{ $venta['id'] }}</td>
-                        <td class="text-center">{{ $venta['Nombre']  }} {{ $venta['ApellidoPaterno']  }} {{ $venta['ApellidoMaterno']  }}</td>
+                        <td class="text-center">{{ $venta['nombre']  }} {{ $venta['apellido']  }}</td>
                         <td class="text-center">{{ $venta['dni'] }}</td>
                         <td class="text-center">{{ $venta['sale_date'] }}</td>
                         <td class="text-center">{{ $venta['total'] }}</td>  
@@ -38,12 +38,12 @@
                         <td class="text-center">{{ $venta['rest'] }} dias</td> 
                         <td class="text-center" style="background:{{ $venta['color'] }}"> {{ $venta['mensaje'] }}</td> 
                         <td width="50px">
-                            @can('admin.venta.update')
+                            @can('venta.update')
                                 <a href="{{ url('/venta/'.$venta['id'].'/edit') }}" class="btn btn-warning">Editar</a>
                             @endcan                            
                         </td>           
                         <td width="50px">
-                            @can('admin.venta.destroy')
+                            @can('venta.destroy')
                                 <form action="{{ url('/venta/'.$venta['id']) }}" class="d-inline" method="post">
                                     @csrf
                                     {{ method_field('DELETE') }}

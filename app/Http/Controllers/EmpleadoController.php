@@ -26,7 +26,7 @@ class EmpleadoController extends Controller
         $texto = trim($request->get('texto'));
 
        $empleados = DB::table('empleados')
-                    ->select('id','Nombre','ApellidoPaterno','ApellidoMaterno','dni','Telefono','Correo','Domicilio','Area')
+                    ->select('id','Nombre','ApellidoPaterno','ApellidoMaterno','dni','Telefono','Correo','Domicilio')
                     ->where('ApellidoPaterno','LIKE','%'.$texto.'%')
                     ->orwhere('dni','LIKE','%'.$texto.'%')
                     ->orderBy('ApellidoPaterno','asc')
@@ -69,7 +69,6 @@ class EmpleadoController extends Controller
             'Telefono'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|',
             
         ];
         $mensaje=[
@@ -137,7 +136,6 @@ class EmpleadoController extends Controller
             'Telefono'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|',
         ]);        
         
         $datosEmpleado = request()->except(['_token','_method']);

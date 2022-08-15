@@ -21,7 +21,7 @@
                             <div class="h2">Ventas</div>
                         </div>
                         <div class="chart-wrapper mt-3 mx-3" style="height:35px;">
-                            @can('admin.venta.index')
+                            @can('venta.index')
                             <a href="{{ url('venta') }}" class="swall-box-footer h4">Ventas <i class="fa fa-arrow-circle-right"></i></a>
                             @endcan
                         </div>

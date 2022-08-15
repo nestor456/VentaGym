@@ -42,7 +42,7 @@ class RoleController extends Controller
     {
         $role = Role::create($request->only('name'));
         $role->permissions()->sync($request->input('permissions', []));
-        return redirect()->route('admin.roles.index')->with('info','El rol se creó con éxito');
+        return redirect()->route('roles.index')->with('info','El rol se creó con éxito');
 
     }
 
@@ -81,7 +81,7 @@ class RoleController extends Controller
     {
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
-        return redirect()->route('admin.roles.index')->with('info','El rol se actualizo con éxito');
+        return redirect()->route('roles.index')->with('info','El rol se actualizo con éxito');
 
     }
 
@@ -94,7 +94,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('admin.roles.index')->with('info','El rol se eliminado con éxito');
+        return redirect()->route('roles.index')->with('info','El rol se eliminado con éxito');
 
     }
 }

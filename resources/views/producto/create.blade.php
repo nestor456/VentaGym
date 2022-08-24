@@ -8,8 +8,6 @@
             <div class="main-section">
                 <div class="container">
                     <div class="col-lg-10 col-md-10">
-                        <form action="{{ route('categories.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
                              @if(count($errors)>0)
                              <div class="alert alert-danger" role="alert">
                                  <ul>
@@ -79,7 +77,7 @@
                                     <button type="submit" class="btn btn-primary">Guardar</button>
                                 </div>
                               </div>                
-                        </form>
+
                     </div>
                 </div>
             </div>

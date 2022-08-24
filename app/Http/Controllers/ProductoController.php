@@ -101,7 +101,9 @@ class ProductoController extends Controller
     {
         //
         $producto = Producto::findOrFail($id);
-        return view('producto.edite', compact('producto'));
+        $categories = Categories::get();
+        $provides = provides::get();
+        return view('producto.edite', compact('producto','categories','provides'));
     }
 
     /**

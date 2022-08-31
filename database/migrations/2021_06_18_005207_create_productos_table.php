@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->id();
             $table->string('NombreProducto');
             $table->string('idcategoria');
-            $table->string('idsubcategoria',['1','0'])->default('VALID');
+            $table->string('idsubcategoria');
             $table->string('idproveedor');
             $table->text('Detalle');
             $table->integer('stock');

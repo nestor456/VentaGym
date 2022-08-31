@@ -37,7 +37,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>
-                                                                <input type="text" name="NombreProducto" id="NombreProducto" class="form-control" placeholder="Nombre de Producto">
+                                                                <input type="text" name="NombreProducto" id="NombreProducto" class="form-control" placeholder="Nombre de Producto" value="{{ $producto->NombreProducto}}">
                                                             </th>
                                                             <th>
                                                                 <select class="form-control" name="idcategoria" id="idcategoria">
@@ -68,11 +68,11 @@
                                                         </tr>
                                                         <tr>
                                                             <th colspan="3">
-                                                                <textarea class="form-control" name="Detalle" id="Detalle" class="form-control" placeholder="Descripción"></textarea></th>
+                                                                <textarea class="form-control" name="Detalle" id="Detalle" class="form-control" placeholder="Descripción">{{$producto->Detalle}}</textarea></th>
                                                         </tr>
                                                         <tr>
-                                                            <th><input type="integer" name="stock" id="stock" class="form-control" placeholder="Stock"></th>
-                                                            <th><input type="integer" name="precio" id="precio" class="form-control" placeholder="Precio"></th>
+                                                            <th><input type="integer" name="stock" id="stock" class="form-control" placeholder="Stock" value="{{ $producto->stock }}"></th>
+                                                            <th><input type="integer" name="precio" id="precio" class="form-control" placeholder="Precio" value="{{ $producto->precio }}"></th>
                                                         </tr>
                                                     </thead>
                                                 </table>

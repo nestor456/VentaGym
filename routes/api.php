@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/producto/{id}/subCategory',  [ProductoController::class, 'bySubCategory']);
+Route::get('/cliente/{id}/provincia',  [DepartmentController::class, 'byprovincia']);
+Route::get('/cliente/{id}/distrito',  [DepartmentController::class, 'bydistrito']);

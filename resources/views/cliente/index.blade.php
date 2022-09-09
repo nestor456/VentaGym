@@ -15,8 +15,8 @@
 @endif
 
 <div class="row justify-content-md-center">
-    <div class="col-lg-10 col-md-10">
-        
+    <div class="col-lg-4 col-md-4">
+        <canvas id="clientesdias"></canvas>
     </div>
 </div>
 
@@ -38,8 +38,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Fecha de Creacón</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
+                                <th>Nombre y Apellido</th>
                                 <th>Tipo de Documento</th>
                                 <th>N°</th>
                                 <th>Fecha de Nacimiento</th>
@@ -61,8 +60,8 @@
                                 @foreach($clientes as $cliente)
                             <tr>
                                 <th class="text-center">{{$cliente->id}}</th>
-                                <th class="text-center">{{$cliente->nombre}}</th>
-                                <th class="text-center">{{$cliente->apellido}}</th>
+                                <th class="text-center">{{$cliente->fecha}}</th>
+                                <th class="text-center">{{$cliente->nombre}} {{$cliente->apellido}}</th>
                                 <th class="text-center">{{$cliente->tipo_doc}}</th>
                                 <th class="text-center">{{$cliente->number_doc}}</th>
                                 <th class="text-center">{{$cliente->fecha_naci}}</th>
@@ -104,10 +103,38 @@
 
 @endsection
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script>
         $('#myTab').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
           })
+
+          var Clientdias = document.getElementById('clientesdias').getContext('2d');
+          var charCliente = new Chart(Clientdias, {
+            type:'bar',
+            data:{
+                labels:[<?php foreach($clientedias as $clientedia){
+                    $dia = $clientedia->dia;
+                    echo '"'.$dia.'",';}?>],
+                datasets:[{
+                        label:'Ventas',
+                        data:[<?php foreach($clientedias as $reg){echo ''.$reg->totaldia.',';} ?>],
+                        backgroundColor: 'rgba(255, 99, 130, 0.2)',
+                        borderColor: 'rgba(255, 99, 130, 1)',
+                        barPercentage: 0.5,
+                        barThickness: 100,
+                        maxBarThickness: 100,
+                        minBarLength: 100,
+                    }]
+            },
+            options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+            },
+        }) 
     </script>
 @stop

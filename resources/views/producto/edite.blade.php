@@ -48,9 +48,7 @@
                                                                 </select>
                                                             </th>
                                                             <th>
-                                                                <select class="form-control" name="idsubcategoria" id="idsubcategoria">
-                                                                    
-                                                                </select>
+                                                                <select class="form-control" name="idsubcategoria" id="idsubcategoria"></select>
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -93,6 +91,7 @@
 @stop
 
 @section('js')
+    <script src="/js/producto/edit.js"></script>
     <script type="text/javascript"> 
         $("#idproveedor2").change(mostrarruc); 
 
@@ -102,20 +101,5 @@
             $("#idproveedor").val(datosProveedor[0]);
             $("#idproveedor3").val(datosProveedor[0]);
         } 
-
-        $(document).ready(function(){
-            $("#idcategoria").change(function(){
-              var id = $(this).val();
-              $.get('subCategory/'+ id, function(datas){ 
-                console.log(datas);
-                $('#idsubcategoria').empty();
-                $('#idsubcategoria').append("<option value='0' disabled selected>Sub Categorias</option>")
-                $.each(datas, function(id, value){
-                    console.log(value.id);
-                    $('#idsubcategoria').append("<option value='" + value.id + "'>"+ value.name +"</option>")
-                });      
-              });
-            });
-          })
     </script>
 @stop

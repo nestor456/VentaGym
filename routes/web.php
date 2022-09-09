@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
     Route::get('producto/subCategory/{id}',  [ProductoController::class, 'bySubCategory']);    
+
     Route::get('venta/pdf/{venta}', [VentaController::class, 'pdf'])->name('venta.pdf');
     
     Route::get('reporte/reports_day',[ReporteController::class, 'reports_day'])->name('reports.day');

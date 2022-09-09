@@ -17,23 +17,17 @@
                       <h5 class="card-header">Registro de Clientes</h5>
                       <div class="card-body">
                                 <div class="card">
-                                  <div class="card-body">
+                                  <div class="card-body">                                      
                                     <table class="table table-bordered">
                                       <thead>
                                         <tr>
-                                          <th scope="col">
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" name="tipo_cp" id="inlineRadio1" value="option1">
-                                              <label class="form-check-label" for="inlineRadio1">Persona Natural</label>
-                                            </div>              
+                                          <th>
+                                            <select class="form-control" aria-label="Default select example" name="tipo_cp" id="tipo_cp" onchange="seleccionado()">
+                                              <option value="Persona Natural" selected>Persona Natural</option>
+                                              <option value="Empresa">Empresa</option>
+                                            </select>
                                           </th>
-                                          <th scope="col">
-                                            <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio" name="tipo_cp"  id="inlineRadio2" value="option2">
-                                              <label class="form-check-label" for="inlineRadio2">Empresa</label>
-                                            </div>
-                                          </th>
-                                          <th scope="col"><input type="date" class="form-control" name="fecha" value="{{ isset($cliente->fecha)?$cliente->fecha:'' }}"></th>
+                                          <th scope="col"><input type="date" class="form-control" name="fecha" value="{{ isset($cliente->fecha)?$cliente->fecha:'' }}"></th> 
                                         </tr>
                                       </thead>
                                     </table>
@@ -88,7 +82,7 @@
                                   </div>
                                 </div>
                               
-                                <div class="card">
+                                <div class="card" style="display:none;" id="empresa">
                                   <div class="card-body">
                                     <table class="table table-bordered">
                                       <thead>
@@ -117,10 +111,31 @@
                                         <tr>
                                           <th colspan="3"><input type="text" class="form-control" name="direccion" value="{{ isset($cliente->number_doc)?$cliente->number_doc:'' }}" placeholder="Dirección"></th>
                                         </tr>
-                                        <tr>
-                                          <th><input type="text" class="form-control" name="departamento" value="{{ isset($cliente->departamento)?$cliente->departamento:'' }}" placeholder="Departamento"></th>
-                                          <th><input type="text" class="form-control" name="provincia" value="{{ isset($cliente->provincia)?$cliente->provincia:'' }}" placeholder="Provincia"></th>
-                                          <th><input type="text" class="form-control" name="distrito" value="{{ isset($cliente->distrito)?$cliente->distrito:'' }}"  placeholder="Distrito"></th>
+                                        <tr> 
+                                          <th>
+                                              <div class="col-md-15">
+                                                  <select class="form-control" name="departamento" id="iddepartamento">
+                                                    <option value="{{$departament->id}}" disabled selected>{{$departament->name}}</option>
+                                                      @foreach($departamentos as $departamento)
+                                                          <option value="{{ $departamento->id}}">{{$departamento->name}}</option>
+                                                      @endforeach
+                                                  </select>
+                                              </div>
+                                              </th>
+                                          <th>
+                                              <div class="col-md-15">
+                                                  <select class="form-control" name="provincia" id="idprovincia">
+                                                      <option value="{{$provicia->id}}" disabled selected>{{$provicia->name}}</option>
+                                                  </select>
+                                              </div>                                                
+                                          </th>
+                                          <th>
+                                              <div class="col-md-15">
+                                                  <select class="form-control" name="distrito" id="iddistrito">
+                                                    <option value="{{$distrito->id}}" disabled selected>{{$distrito->name}}</option>
+                                                  </select>
+                                              </div>                                                
+                                          </th>
                                         </tr>
                                       </thead>
                                     </table>
@@ -149,3 +164,19 @@
   </div>
 </main>
 @endsection
+@section('js')
+    <script src="/js/distrito/create.js"></script>
+    <script>
+        function seleccionado(){
+            var opt = $('#tipo_cp').val();
+            
+            //alert(opt);
+            if(opt=="Empresa"){
+                $('#empresa').show();
+            }
+            if(opt=="Persona Natural"){
+                $('#empresa').hide();
+            }
+        }
+    </script>
+@stop

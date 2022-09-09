@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
 
        $this->call(DocumentSeeder::class);
        $this->call(GendersSeeder::class);
+
+       $this->call(DepartamentorSeeder::class);
+       $this->call(ProvinciaSeeder::class);
+       $this->call(DistritoSeeder::class);
     }
 }

@@ -43,8 +43,7 @@
                                                         </select>
                                                     </th>
                                                     <th>
-                                                        <select class="form-control" name="idsubcategoria" id="idsubcategoria">
-                                                            
+                                                        <select class="form-control" name="idsubcategoria" id="idsubcategoria">                                                            
                                                         </select>
                                                     </th>
                                                 </tr>

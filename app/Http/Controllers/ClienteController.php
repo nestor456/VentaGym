@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+
+use App\Models\Departamento;
+use App\Models\Provincia;
+use App\Models\Distrito;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -20,7 +25,6 @@ class ClienteController extends Controller
     public function index()
     {
         abort_if(Gate::denies('cliente.index'), 403);
-
         
         $clientes = Cliente::paginate(15); 
     /*$texto = trim($request->get('texto'));
@@ -60,7 +64,9 @@ class ClienteController extends Controller
            }            
         }*/
         //dd($details);
-        return view('cliente.index', compact('clientes'));
+        $clientedias=DB::select('SELECT DATE_FORMAT(c.fecha,"%d/%m/%Y") as dia, count(c.id) as totaldia from clientes c group by c.fecha order by day(c.fecha) desc limit 15');
+        //dd($clientedias);
+        return view('cliente.index', compact('clientes','clientedias'));
     }
 
     /**
@@ -71,8 +77,9 @@ class ClienteController extends Controller
     public function create()
     {
         //
+        $departamentos = Departamento::get();
         abort_if(Gate::denies('cliente.create'), 403);
-        return view('cliente.create');
+        return view('cliente.create', compact('departamentos'));
     }
 
     /**
@@ -139,8 +146,14 @@ class ClienteController extends Controller
     {
         //
         abort_if(Gate::denies('cliente.update'), 403);
+        $departamentos = Departamento::get();
         $cliente = Cliente::findOrFail($id);
-        return view('cliente.edite', compact('cliente'));
+
+        $departament = Departamento::findOrFail($cliente->departamento);
+        $provicia = Provincia::findOrFail($cliente->provincia);
+        $distrito = Distrito::findOrFail($cliente->distrito);
+        //dd($provicia);
+        return view('cliente.edite', compact('cliente','departamentos','departament','provicia','distrito'));
     }
 
     /**

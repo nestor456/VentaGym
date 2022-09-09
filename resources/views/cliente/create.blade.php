@@ -11,6 +11,7 @@
 </div>
 @stop
 @section('js')
+    <script src="/js/distrito/create.js"></script>
     <script>
         function seleccionado(){
             var opt = $('#tipo_cp').val();

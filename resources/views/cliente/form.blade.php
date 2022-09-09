@@ -126,10 +126,31 @@
                                           <tr>
                                             <th colspan="3"><input type="text" class="form-control" name="direccion" placeholder="Dirección"></th>
                                           </tr>
-                                          <tr>
-                                            <th><input type="text" class="form-control" name="departamento" placeholder="Departamento"></th>
-                                            <th><input type="text" class="form-control" name="provincia" placeholder="Provincia"></th>
-                                            <th><input type="text" class="form-control" name="distrito"  placeholder="Distrito"></th>
+                                          <tr> 
+                                            <th>
+                                                <div class="col-md-15">
+                                                    <select class="form-control" name="departamento" id="iddepartamento">
+                                                        <option value="" disabled selected>Departamento</option>
+                                                        @foreach($departamentos as $departamento)
+                                                            <option value="{{ $departamento->id}}">{{$departamento->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                </th>
+                                            <th>
+                                                <div class="col-md-15">
+                                                    <select class="form-control" name="provincia" id="idprovincia">
+                                                        <option value="" disabled selected>Provincia</option>
+                                                    </select>
+                                                </div>                                                
+                                            </th>
+                                            <th>
+                                                <div class="col-md-15">
+                                                    <select class="form-control" name="distrito" id="iddistrito">
+                                                        <option value="" disabled selected>Distrito</option>
+                                                    </select>
+                                                </div>                                                
+                                            </th>
                                           </tr>
                                         </thead>
                                       </table>

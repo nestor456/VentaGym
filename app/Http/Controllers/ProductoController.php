@@ -127,7 +127,7 @@ class ProductoController extends Controller
         ];
         $this->validate($request, $campos, $mensaje);
 
-        $datosProducto = request()->except(['_token','_method']);
+        $datosProducto = request()->except(['_token','_method','idproveedor2']);
         Producto::where('id','=',$id)->update($datosProducto);
         return redirect('producto')->with('info','El producto se edito con éxito');
     }
@@ -146,7 +146,6 @@ class ProductoController extends Controller
     }
 
     public function bySubCategory($id){
-
         $data = Subcategories::where('category_id','=',$id)->get();
         return response()->json($data, 200);        
     }

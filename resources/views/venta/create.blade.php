@@ -31,7 +31,7 @@
                     </select>
                 </div>     
 
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <input type="text" name="cliente_id" id="cliente_id" class="form-control">
                     <input type="text" name="dni" id="dni" class="form-control">
                 </div>
